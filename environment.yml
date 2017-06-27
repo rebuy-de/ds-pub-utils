@@ -1,0 +1,16 @@
+name: rebuy-pub-ds-utils
+channels:
+  - defaults
+dependencies:
+  - python=3.6
+  - scikit-learn
+  - pandas
+  - numpy
+  - matplotlib
+  - pytest=3.1.2
+  - jupyter
+  - ipython
+# Include pip based packages
+  - pip:
+    - sklearn-pandas
+    - imbalanced-learn
