@@ -6,7 +6,7 @@ from pandas.testing import assert_series_equal
 from pubdsutils import data_preparation as dp
 from collections import OrderedDict
 
-class TestRatioBetweenColumnsDF(unittest.TestCase):
+class TestRatioBetweenColumns(unittest.TestCase):
 
     def setUp(self):
         self.df = pd.DataFrame(OrderedDict(
@@ -50,45 +50,7 @@ class TestRatioBetweenColumnsDF(unittest.TestCase):
                               numer='foo', denom='bar').transform,([1,2,3]))
 
 
-class TestRatioBetweenColumnsSeries(unittest.TestCase):
-
-    def setUp(self):
-        self.ser = pd.Series(OrderedDict(
-            {
-                "v1": 10,
-                "v2": 2,
-                "v3": 3,
-            })
-        )
-
-    def test_defaults(self):
-        op = dp.RatioBetweenColumns(numer='v1', denom='v2')
-        res = op.transform(self.ser)
-        expected_res = pd.Series(OrderedDict(
-            {
-                "v1": 10,
-                "v2": 2,
-                "v3": 3,
-                "v1Tov2Ratio": 5.
-            })
-        )
-        assert_series_equal(res, expected_res)
-
-    def test_set_feat_name(self):
-        op = dp.RatioBetweenColumns(numer='v1', denom='v2', feat_name='my_feat')
-        res = op.transform(self.ser)
-        expected_res = pd.Series(OrderedDict(
-            {
-                "v1": 10,
-                "v2": 2,
-                "v3": 3,
-                "my_feat": 5.
-            })
-        )
-        assert_series_equal(res, expected_res)
-
-
-class TestRatioColumnToConstDF(unittest.TestCase):
+class TestRatioColumnToConst(unittest.TestCase):
 
     def setUp(self):
         self.df = pd.DataFrame(OrderedDict(
@@ -131,45 +93,7 @@ class TestRatioColumnToConstDF(unittest.TestCase):
                           dp.RatioColumnToConst(col='a', const=4).transform,[1,2,3])
 
 
-class TestRatioColumnToConstSeries(unittest.TestCase):
-
-    def setUp(self):
-        self.ser = pd.Series(OrderedDict(
-            {
-                "v1": 6,
-                "v2": 1,
-                "v3": 3
-            })
-        )
-
-    def test_defaults(self):
-        op = dp.RatioColumnToConst(col='v1', const=3)
-        res = op.transform(self.ser)
-        expected_res = pd.Series(OrderedDict(
-            {
-                "v1": 6,
-                "v2": 1,
-                "v3": 3,
-                "v1To3Ratio": 2.
-            })
-        )
-        assert_series_equal(res, expected_res)
-
-    def test_set_feat_name(self):
-        op = dp.RatioColumnToConst(col='v1', const=3, feat_name='my_feat')
-        res = op.transform(self.ser)
-        expected_res = pd.Series(OrderedDict(
-            {
-                "v1": 6,
-                "v2": 1,
-                "v3": 3,
-                "my_feat": 2.
-            })
-        )
-        assert_series_equal(res, expected_res)
-
-
-class TestDaysFromLaterToEarlyDF(unittest.TestCase):
+class TestDaysFromLaterToEarly(unittest.TestCase):
 
     def setUp(self):
         self.df = pd.DataFrame(OrderedDict(
@@ -237,46 +161,7 @@ class TestDaysFromLaterToEarlyDF(unittest.TestCase):
                           [1,2,4])
 
 
-class TestDaysFromLaterToEarlySeries(unittest.TestCase):
-
-    def setUp(self):
-        self.ser = pd.Series(OrderedDict(
-            {
-                "v1": 2,
-                "start": pd.datetime(2017,1,1),
-                "end": pd.datetime(2017,1,10)
-            })
-        )
-        self
-
-    def test_defaults(self):
-        op = dp.DaysFromLaterToEarly(start='start', end='end')
-        res = op.transform(self.ser)
-        expected_res = pd.Series(OrderedDict(
-            {
-                "v1": 2,
-                "start": pd.datetime(2017,1,1),
-                "end": pd.datetime(2017,1,10),
-                "DaysFrom_start_To_end": 9
-            })
-        )
-        assert_series_equal(res, expected_res)
-
-    def test_set_feat_name(self):
-        op = dp.DaysFromLaterToEarly(start='start', end='end', feat_name='foo')
-        res = op.transform(self.ser)
-        expected_res = pd.Series(OrderedDict(
-            {
-                "v1": 2,
-                "start": pd.datetime(2017,1,1),
-                "end": pd.datetime(2017,1,10),
-                "foo": 9
-            })
-        )
-        assert_series_equal(res, expected_res)
-
-
-class TestDayOfTheWeekForColumnDF(unittest.TestCase):
+class TestDayOfTheWeekForColumn(unittest.TestCase):
 
     def setUp(self):
         self.df = pd.DataFrame(OrderedDict(
@@ -330,40 +215,75 @@ class TestDayOfTheWeekForColumnDF(unittest.TestCase):
                           [1,2,3])
 
 
-class TestDayOfTheWeekForColumnSeries(unittest.TestCase):
+class TestHourOfTheDayForColumn(unittest.TestCase):
 
     def setUp(self):
-        self.df = pd.Series(OrderedDict(
+        self.df = pd.DataFrame(OrderedDict(
             {
-                "v1": 1,
-                "date": pd.datetime(2017, 6, 27)
+                "v1": [1, 2, 3],
+                "date": [
+                    pd.datetime(2017, 6, 27, 10, 12, 52),
+                    pd.datetime(2017, 6, 26, 23, 0, 12),
+                    pd.datetime(2017, 6, 25, 8, 0, 0)
+                ]
             }
-        ))
+        )
+        )
 
     def test_defaults(self):
-        op = dp.DayOfTheWeekForColumn(col='date')
-        res = op.transform(self.df)
-        expected_res = pd.DataFrame(OrderedDict(
-            {
-                "v1": 1,
-                "date": pd.datetime(2017, 6, 27),
-                "date_DayOfTheWeek": pd.Series([1]).astype('category')
-            }
-        ))
-        assert_frame_equal(res, expected_res)
-
-    def test_set_feat_name(self):
-        op = dp.DayOfTheWeekForColumn(col='date', feat_name='foo')
+        op = dp.HourOfTheDayForColumn(col='date')
         res = op.transform(self.df)
         expected_res = pd.DataFrame(OrderedDict(
             {
                 "v1": [1, 2, 3],
                 "date": [
-                    pd.datetime(2017, 6, 27),
-                    pd.datetime(2017, 6, 26),
-                    pd.datetime(2017, 6, 25)
+                    pd.datetime(2017, 6, 27, 10, 12, 52),
+                    pd.datetime(2017, 6, 26, 23, 0, 12),
+                    pd.datetime(2017, 6, 25, 8, 0, 0)
                 ],
-                "foo": pd.Series([1,0,6]).astype('category')
+                "date_HourOfTheDay": pd.Series([10,23,8]).astype('category')
             }
         ))
+        assert_frame_equal(res, expected_res)
+
+    def test_set_feat_name(self):
+        op = dp.HourOfTheDayForColumn(col='date', feat_name='foo')
+        res = op.transform(self.df)
+        expected_res = pd.DataFrame(OrderedDict(
+            {
+                "v1": [1, 2, 3],
+                "date": [
+                    pd.datetime(2017, 6, 27, 10, 12, 52),
+                    pd.datetime(2017, 6, 26, 23, 0, 12),
+                    pd.datetime(2017, 6, 25, 8, 0, 0)
+                ],
+                "foo": pd.Series([10, 23, 8]).astype('category')
+            }
+        ))
+        assert_frame_equal(res, expected_res)
+
+    def test_Errors(self):
+        self.assertRaises(ValueError, dp.HourOfTheDayForColumn)
+        self.assertRaises(ValueError,
+                          dp.HourOfTheDayForColumn(col='foo').transform,
+                          [1,2,3])
+
+class TestSelectColumns(unittest.TestCase):
+
+    def setUp(self):
+        np.random.seed(42)
+        self.df = pd.DataFrame(
+            np.random.random(size=(10,5)),
+            columns=['foo', 'bar', 'goo', 'hello', 'world']
+        )
+
+    def test_defaults(self):
+        op = dp.SelectColumns(cols=['foo', 'bar'])
+        res = op.transform(self.df)
+
+        np.random.seed(42)
+        expected_res = pd.DataFrame(
+            np.random.random(size=(10,5)),
+            columns=['foo', 'bar', 'goo', 'hello', 'world']
+        )[['foo', 'bar']]
         assert_frame_equal(res, expected_res)

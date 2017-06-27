@@ -22,8 +22,6 @@ class RatioBetweenColumns(BaseEstimator, TransformerMixin):
         df = df.copy()
         if isinstance(df, pd.DataFrame):
             df[self.feat_name] = df[self.numer].div(df[self.denom])
-        elif isinstance(df, pd.Series):
-            df[self.feat_name] = df[self.numer] / df[self.denom]
         else:
             raise ValueError("Non supported input")
         return df
@@ -52,8 +50,6 @@ class RatioColumnToConst(BaseEstimator, TransformerMixin):
         df = df.copy()
         if isinstance(df, pd.DataFrame):
             df[self.feat_name] = df[self.col].div(self.const)
-        elif isinstance(df, pd.Series):
-            df[self.feat_name] = df[self.col] / self.const
         else:
             raise ValueError("Non supported input")
         return df
@@ -78,11 +74,8 @@ class DaysFromLaterToEarly(BaseEstimator, TransformerMixin):
         print(type(df))
         if isinstance(df, pd.DataFrame):
             df[self.feat_name] = (df[self.end] - df[self.start]).apply(lambda x: x.days)
-        elif isinstance(df, pd.Series):
-            df[self.feat_name] = (df[self.end] - df[self.start]).days
         else:
             raise ValueError("Non supported input")
-
         return df
 
     def fit(self, df, y=None, **fit_params):
@@ -104,8 +97,6 @@ class DayOfTheWeekForColumn(BaseEstimator, TransformerMixin):
         if isinstance(df, pd.DataFrame):
             df[self.feat_name] = df[self.col].apply(
                 lambda x: x.dayofweek).astype('category')
-        elif isinstance(df, pd.Series):
-            df[self.feat_name] = df[self.col].dayofweek.astype('category')
         else:
             raise ValueError("Non supported input")
         return df
@@ -117,18 +108,18 @@ class DayOfTheWeekForColumn(BaseEstimator, TransformerMixin):
 class HourOfTheDayForColumn(BaseEstimator, TransformerMixin):
 
     def __init__(self, col=None, feat_name=None):
+        if col is None:
+            raise ValueError("col must be provided")
         self.col = col
         self.feat_name = feat_name
         if self.feat_name is None:
-            self.feat_name = "{}-HourOfTheDay".format(col)
+            self.feat_name = "{}_HourOfTheDay".format(col)
 
     def transform(self, df, **transform_params):
         df = df.copy()
         if isinstance(df, pd.DataFrame):
             df[self.feat_name] = df[self.col].apply(
                 lambda x: x.hour).astype('category')
-        elif isinstance(df, pd.Series):
-            df[self.feat_name] = df[self.col].hour.astype('category')
         else:
             raise ValueError("Non supported input")
         return df
@@ -140,6 +131,8 @@ class HourOfTheDayForColumn(BaseEstimator, TransformerMixin):
 class SelectColumns(BaseEstimator, TransformerMixin):
 
     def __init__(self, cols=None):
+        if cols is None:
+            raise ValueError("List of columns cols must be provided. Currently None")
         self.cols = cols
 
     def transform(self, df, **transform_params):
