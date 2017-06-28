@@ -89,6 +89,7 @@ class TestRatioColumnToConst(unittest.TestCase):
 
     def test_Errors(self):
         self.assertRaises(ValueError, dp.RatioColumnToConst)
+        self.assertRaises(ValueError, dp.RatioColumnToConst, const=3)
         self.assertRaises(ValueError,
                           dp.RatioColumnToConst(col='a', const=4).transform,[1,2,3])
 
@@ -329,6 +330,7 @@ class TestHourOfTheDayForColumn(unittest.TestCase):
         self.assertRaises(ValueError,
                           dp.HourOfTheDayForColumn(col='foo').transform,
                           [1,2,3])
+
 
 class TestSelectColumns(unittest.TestCase):
 
