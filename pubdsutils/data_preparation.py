@@ -1,4 +1,5 @@
 from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.utils.validation import check_is_fitted
 import pandas as pd
 import numpy as np
 
@@ -55,6 +56,41 @@ class RatioColumnToConst(BaseEstimator, TransformerMixin):
         return df
 
     def fit(self, df, y=None, **fit_params):
+        return self
+
+
+class RatioColumnToValue(BaseEstimator, TransformerMixin):
+    """Compute the ratio between the values in a column to either its `mean`
+    or `median`.
+    """
+
+    def __init__(self, col=None, func=None, feat_name=None):
+        if col is None and func is None:
+            raise ValueError("Both col and func have to be provided")
+        self.col = col
+        self.func = func
+        self.feat_name = feat_name
+        if self.feat_name is None:
+            self.feat_name = "{}_RatioTo_{}".format(self.col, self.func)
+
+    def transform(self, df, **transform_params):
+        check_is_fitted(self, 'const_')
+        df = df.copy()
+        if isinstance(df, pd.DataFrame):
+            df[self.feat_name] = df[self.col].div(self.const_)
+        else:
+            raise ValueError("Non supported input")
+        return df
+
+    def fit(self, df, y=None, **fit_params):
+        if self.func == 'mean':
+            self.const_ = df[self.col].mean()
+        elif self.func == 'median':
+            self.const_ = df[self.col].median()
+        else:
+            raise ValueError(
+                "Unsupported function ({}). Can be either mean or median"
+                ).format(self.func)
         return self
 
 

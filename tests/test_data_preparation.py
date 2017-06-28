@@ -93,6 +93,68 @@ class TestRatioColumnToConst(unittest.TestCase):
                           dp.RatioColumnToConst(col='a', const=4).transform,[1,2,3])
 
 
+class TestRatioColumnToValue(unittest.TestCase):
+
+    def setUp(self):
+        self.df = pd.DataFrame(OrderedDict(
+            {
+                "v1": [1, 1, 2, 2, 4],
+                "v2": [1, 2, 2, 4, 10]
+            })
+        )
+        self.df2 = pd.DataFrame(OrderedDict(
+            {
+                "v1": [10, 20, 30, 40, 50],
+                "v2": [10, 20, 30, 40, 50]
+            }
+        ))
+
+    def test_defaults_mean(self):
+        op = dp.RatioColumnToValue(col='v1', func='mean')
+        res = op.fit_transform(self.df)
+        expected_res = pd.DataFrame(OrderedDict(
+            {
+                "v1": [1, 1, 2, 2, 4],
+                "v2": [1, 2, 2, 4, 10],
+                "v1_RatioTo_mean": [0.5, 0.5, 1., 1., 2.]
+            })
+        )
+        assert_frame_equal(res, expected_res)
+
+        res2 = op.transform(self.df2)
+        expected_res2 = pd.DataFrame(OrderedDict(
+            {
+                "v1": [10, 20, 30, 40, 50],
+                "v2": [10, 20, 30, 40, 50],
+                "v1_RatioTo_mean": [5., 10., 15., 20., 25.]
+            }
+        ))
+        assert_frame_equal(res2, expected_res2)
+
+    def test_defaults_median(self):
+        op = dp.RatioColumnToValue(col='v2', func='median')
+        res = op.fit_transform(self.df)
+
+        expected_res = pd.DataFrame(OrderedDict(
+            {
+                "v1": [1, 1, 2, 2, 4],
+                "v2": [1, 2, 2, 4, 10],
+                "v2_RatioTo_median": [0.5, 1., 1., 2., 5.]
+            })
+        )
+        assert_frame_equal(res, expected_res)
+
+        res2 = op.transform(self.df2)
+        expected_res2 = pd.DataFrame(OrderedDict(
+            {
+                "v1": [10, 20, 30, 40, 50],
+                "v2": [10, 20, 30, 40, 50],
+                "v2_RatioTo_median": [5., 10., 15., 20., 25.]
+            }
+        ))
+        assert_frame_equal(res2, expected_res2)
+
+
 class TestDaysFromLaterToEarly(unittest.TestCase):
 
     def setUp(self):
