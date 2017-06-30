@@ -107,7 +107,6 @@ class DaysFromLaterToEarly(BaseEstimator, TransformerMixin):
 
     def transform(self, df, **transform_params):
         df = df.copy()
-        print(type(df))
         if isinstance(df, pd.DataFrame):
             df[self.feat_name] = (df[self.end] - df[self.start]).apply(lambda x: x.days)
         else:
