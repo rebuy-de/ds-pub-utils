@@ -2,7 +2,7 @@ import unittest
 import pandas as pd
 import numpy as np
 from pandas.testing import assert_frame_equal
-from pubdsutils import data_preparation as dp
+from pubdsutils import features_engineering as fe
 from collections import OrderedDict
 from sklearn.pipeline import make_pipeline
 
@@ -30,8 +30,8 @@ class TestSimplePipeline(unittest.TestCase):
     def test_simple_pipeline(self):
         df_copy = self.df.copy()
         pipeline = make_pipeline(
-            dp.RatioColumnToConst(col='v1', const=2, feat_name='v1_to_2'),
-            dp.RatioBetweenColumns(
+            fe.RatioColumnToConst(col='v1', const=2, feat_name='v1_to_2'),
+            fe.RatioBetweenColumns(
                 numer='v2', denom='v1', feat_name='v2_to_v1')
         )
         res = pipeline.transform(self.df)

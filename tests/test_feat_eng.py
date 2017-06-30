@@ -2,7 +2,7 @@ import unittest
 import pandas as pd
 import numpy as np
 from pandas.testing import assert_frame_equal
-from pubdsutils import data_preparation as dp
+from pubdsutils import features_engineering as fe
 from collections import OrderedDict
 
 
@@ -18,7 +18,7 @@ class TestRatioBetweenColumns(unittest.TestCase):
         )
 
     def test_defaults(self):
-        op = dp.RatioBetweenColumns(numer='v1', denom='v2')
+        op = fe.RatioBetweenColumns(numer='v1', denom='v2')
         res = op.transform(self.df)
         expected_res = pd.DataFrame(OrderedDict(
             {
@@ -31,7 +31,7 @@ class TestRatioBetweenColumns(unittest.TestCase):
         assert_frame_equal(res, expected_res)
 
     def test_set_feat_name(self):
-        op = dp.RatioBetweenColumns(
+        op = fe.RatioBetweenColumns(
             numer='v1', denom='v2', feat_name='my_feat')
         res = op.transform(self.df)
         expected_res = pd.DataFrame(OrderedDict(
@@ -45,9 +45,9 @@ class TestRatioBetweenColumns(unittest.TestCase):
         assert_frame_equal(res, expected_res)
 
     def test_Errors(self):
-        self.assertRaises(ValueError, dp.RatioBetweenColumns)
+        self.assertRaises(ValueError, fe.RatioBetweenColumns)
         self.assertRaises(ValueError,
-                          dp.RatioBetweenColumns(
+                          fe.RatioBetweenColumns(
                               numer='foo', denom='bar').transform, ([1, 2, 3]))
 
 
@@ -63,7 +63,7 @@ class TestRatioColumnToConst(unittest.TestCase):
         )
 
     def test_defaults(self):
-        op = dp.RatioColumnToConst(col='v1', const=3)
+        op = fe.RatioColumnToConst(col='v1', const=3)
         res = op.transform(self.df)
         expected_res = pd.DataFrame(OrderedDict(
             {
@@ -76,7 +76,7 @@ class TestRatioColumnToConst(unittest.TestCase):
         assert_frame_equal(res, expected_res)
 
     def test_set_feat_name(self):
-        op = dp.RatioColumnToConst(col='v1', const=3, feat_name='my_feat')
+        op = fe.RatioColumnToConst(col='v1', const=3, feat_name='my_feat')
         res = op.transform(self.df)
         expected_res = pd.DataFrame(OrderedDict(
             {
@@ -89,10 +89,10 @@ class TestRatioColumnToConst(unittest.TestCase):
         assert_frame_equal(res, expected_res)
 
     def test_Errors(self):
-        self.assertRaises(ValueError, dp.RatioColumnToConst)
-        self.assertRaises(ValueError, dp.RatioColumnToConst, const=3)
+        self.assertRaises(ValueError, fe.RatioColumnToConst)
+        self.assertRaises(ValueError, fe.RatioColumnToConst, const=3)
         self.assertRaises(ValueError,
-                          dp.RatioColumnToConst(col='a', const=4).transform, [1, 2, 3])
+                          fe.RatioColumnToConst(col='a', const=4).transform, [1, 2, 3])
 
 
 class TestRatioColumnToValue(unittest.TestCase):
@@ -112,7 +112,7 @@ class TestRatioColumnToValue(unittest.TestCase):
         ))
 
     def test_defaults_mean(self):
-        op = dp.RatioColumnToValue(col='v1', func='mean')
+        op = fe.RatioColumnToValue(col='v1', func='mean')
         res = op.fit_transform(self.df)
         expected_res = pd.DataFrame(OrderedDict(
             {
@@ -134,7 +134,7 @@ class TestRatioColumnToValue(unittest.TestCase):
         assert_frame_equal(res2, expected_res2)
 
     def test_defaults_median(self):
-        op = dp.RatioColumnToValue(col='v2', func='median')
+        op = fe.RatioColumnToValue(col='v2', func='median')
         res = op.fit_transform(self.df)
 
         expected_res = pd.DataFrame(OrderedDict(
@@ -177,7 +177,7 @@ class TestDaysFromLaterToEarly(unittest.TestCase):
         )
 
     def test_defaults(self):
-        op = dp.DaysFromLaterToEarly(start='start', end='end')
+        op = fe.DaysFromLaterToEarly(start='start', end='end')
         res = op.transform(self.df)
         expected_res = pd.DataFrame(OrderedDict(
             {
@@ -198,7 +198,7 @@ class TestDaysFromLaterToEarly(unittest.TestCase):
         assert_frame_equal(res, expected_res)
 
     def test_set_feat_name(self):
-        op = dp.DaysFromLaterToEarly(start='start', end='end', feat_name='foo')
+        op = fe.DaysFromLaterToEarly(start='start', end='end', feat_name='foo')
         res = op.transform(self.df)
         expected_res = pd.DataFrame(OrderedDict(
             {
@@ -219,9 +219,9 @@ class TestDaysFromLaterToEarly(unittest.TestCase):
         assert_frame_equal(res, expected_res)
 
     def test_Errors(self):
-        self.assertRaises(ValueError, dp.DaysFromLaterToEarly),
+        self.assertRaises(ValueError, fe.DaysFromLaterToEarly),
         self.assertRaises(ValueError,
-                          dp.DaysFromLaterToEarly(
+                          fe.DaysFromLaterToEarly(
                               start='foo', end='bar').transform,
                           [1, 2, 4])
 
@@ -242,7 +242,7 @@ class TestDayOfTheWeekForColumn(unittest.TestCase):
         )
 
     def test_defaults(self):
-        op = dp.DayOfTheWeekForColumn(col='date')
+        op = fe.DayOfTheWeekForColumn(col='date')
         res = op.transform(self.df)
         expected_res = pd.DataFrame(OrderedDict(
             {
@@ -258,7 +258,7 @@ class TestDayOfTheWeekForColumn(unittest.TestCase):
         assert_frame_equal(res, expected_res)
 
     def test_set_feat_name(self):
-        op = dp.DayOfTheWeekForColumn(col='date', feat_name='foo')
+        op = fe.DayOfTheWeekForColumn(col='date', feat_name='foo')
         res = op.transform(self.df)
         expected_res = pd.DataFrame(OrderedDict(
             {
@@ -274,9 +274,9 @@ class TestDayOfTheWeekForColumn(unittest.TestCase):
         assert_frame_equal(res, expected_res)
 
     def test_Errors(self):
-        self.assertRaises(ValueError, dp.DayOfTheWeekForColumn)
+        self.assertRaises(ValueError, fe.DayOfTheWeekForColumn)
         self.assertRaises(ValueError,
-                          dp.DayOfTheWeekForColumn(col='foo').transform,
+                          fe.DayOfTheWeekForColumn(col='foo').transform,
                           [1, 2, 3])
 
 
@@ -296,7 +296,7 @@ class TestHourOfTheDayForColumn(unittest.TestCase):
         )
 
     def test_defaults(self):
-        op = dp.HourOfTheDayForColumn(col='date')
+        op = fe.HourOfTheDayForColumn(col='date')
         res = op.transform(self.df)
         expected_res = pd.DataFrame(OrderedDict(
             {
@@ -312,7 +312,7 @@ class TestHourOfTheDayForColumn(unittest.TestCase):
         assert_frame_equal(res, expected_res)
 
     def test_set_feat_name(self):
-        op = dp.HourOfTheDayForColumn(col='date', feat_name='foo')
+        op = fe.HourOfTheDayForColumn(col='date', feat_name='foo')
         res = op.transform(self.df)
         expected_res = pd.DataFrame(OrderedDict(
             {
@@ -328,9 +328,9 @@ class TestHourOfTheDayForColumn(unittest.TestCase):
         assert_frame_equal(res, expected_res)
 
     def test_Errors(self):
-        self.assertRaises(ValueError, dp.HourOfTheDayForColumn)
+        self.assertRaises(ValueError, fe.HourOfTheDayForColumn)
         self.assertRaises(ValueError,
-                          dp.HourOfTheDayForColumn(col='foo').transform,
+                          fe.HourOfTheDayForColumn(col='foo').transform,
                           [1, 2, 3])
 
 
@@ -344,7 +344,7 @@ class TestSelectColumns(unittest.TestCase):
         )
 
     def test_defaults(self):
-        op = dp.SelectColumns(cols=['foo', 'bar'])
+        op = fe.SelectColumns(cols=['foo', 'bar'])
         res = op.transform(self.df)
 
         np.random.seed(42)
