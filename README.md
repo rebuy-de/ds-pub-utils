@@ -1,0 +1,20 @@
+# Public Data Science Utilities @ reBuy.com
+
+## Warning / License
+
+This package is, by and large, under active development and *nothing* should be taken here for granted.
+It is intended to be used as part of other, internal, workflows.
+Therefore, it is *very* likely that changes will occur.
+It is available under the [MIT license](./license.md).
+
+## Provided Modules
+
+### `features_engineering`
+
+Along the design lines of [`Scikit learn`](http://scikit-learn.org/), the classes in this module provide `fit`, `transform` and `fit_transform` functionalities.
+However, when transforming data using these classes, _new_ features are _added_, and nothing is removed.
+
+### `preprocessing`
+
+Inspired by [sklearn-pandas](https://github.com/pandas-dev/sklearn-pandas), this module provide preprocessing functionalities for columns of a DataFrame.
+In contrast to the features engineering module, this one doesn't append columns to the data, but rather replaces.
