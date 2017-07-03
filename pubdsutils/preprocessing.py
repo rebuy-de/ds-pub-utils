@@ -58,9 +58,6 @@ class ColumnsOneHotEncoder(BaseEstimator, TransformerMixin):
             columns=self.ohe_cols_names_,
             index=df.index
         )
-        # TODO: Is it the right decision to replace the categorical columns with their OHE version?
-        #       As part of the preprocessing phase, the categorical data should be removed.
-        #       This class probably shouldn't be used as part of feat-eng phase.
         return pd.concat([df.drop(self.cols, axis=1), ohe_cols_df], axis=1)
 
     def fit(self, df, y=None, **fit_params):
