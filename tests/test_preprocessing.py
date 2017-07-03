@@ -16,7 +16,7 @@ class TestColumnsOneHotEncoder(unittest.TestCase):
                 "d1": [1,2,3],
                 "d2": [0,1,1]
             }
-        ))
+        ), index=['foo', 'bar', 'goo'])
 
     def test_basic(self):
         res = pp.ColumnsOneHotEncoder(cols=['d1'], n_values=7).fit_transform(
@@ -33,7 +33,7 @@ class TestColumnsOneHotEncoder(unittest.TestCase):
                 'd1_5': [0.,0.,0.],
                 'd1_6': [0.,0.,0.]
             }
-        ))
+        ), index=['foo', 'bar', 'goo'])
 
         assert_frame_equal(res, expected_res)
 

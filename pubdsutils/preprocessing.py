@@ -55,7 +55,8 @@ class ColumnsOneHotEncoder(BaseEstimator, TransformerMixin):
         ohe_cols_arr = self.ohe.transform(df[self.cols]).toarray()
         ohe_cols_df = pd.DataFrame(
             ohe_cols_arr,
-            columns=self.ohe_cols_names_
+            columns=self.ohe_cols_names_,
+            index=df.index
         )
         # TODO: Is it the right decision to replace the categorical columns with their OHE version?
         #       As part of the preprocessing phase, the categorical data should be removed.
