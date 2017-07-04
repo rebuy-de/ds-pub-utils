@@ -5,3 +5,4 @@ Untitled.ipynb
 build/
 dist/
 pubdsutils.egg-info/
+.coverage

@@ -6,6 +6,7 @@ from numpy.testing import assert_array_equal
 from pubdsutils import preprocessing as pp
 from collections import OrderedDict
 from sklearn.preprocessing import StandardScaler
+from sklearn.exceptions import NotFittedError
 
 
 class TestColumnsOneHotEncoder(unittest.TestCase):
@@ -39,6 +40,10 @@ class TestColumnsOneHotEncoder(unittest.TestCase):
 
     def test_wrong_colums(self):
         self.assertRaises(ValueError, pp.ColumnsOneHotEncoder(cols=['d1'], n_values=2).fit, self.df)
+
+    def test_errors(self):
+        self.assertRaises(ValueError, pp.ColumnsOneHotEncoder)
+        self.assertRaises(ValueError, pp.ColumnsOneHotEncoder,cols=['foo'], n_values='bar')
 
 
 class TestStandartizeFloatCols(unittest.TestCase):
@@ -78,6 +83,8 @@ class TestStandartizeFloatCols(unittest.TestCase):
         )
 
     def test_errors(self):
+        self.assertRaises(
+            NotFittedError, pp.StandartizeFloatCols(cols=['v1']).transform, self.df)
         self.assertRaises(ValueError, pp.StandartizeFloatCols)
         self.assertRaises(ValueError, pp.StandartizeFloatCols,cols=[1,])
         self.assertRaises(ValueError, pp.StandartizeFloatCols(cols=['v3']).fit, self.df)
