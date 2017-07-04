@@ -81,3 +81,27 @@ class TestStandartizeFloatCols(unittest.TestCase):
         self.assertRaises(ValueError, pp.StandartizeFloatCols)
         self.assertRaises(ValueError, pp.StandartizeFloatCols,cols=[1,])
         self.assertRaises(ValueError, pp.StandartizeFloatCols(cols=['v3']).fit, self.df)
+
+
+class TestRemoveConstantColumns(unittest.TestCase):
+
+    def setUp(self):
+        self.df = pd.DataFrame(OrderedDict(
+            {
+                "v1": [1,1,1,1],
+                "v2": [1,2,3,4],
+                "v3": ['foo', 'foo', 'foo', 'foo'],
+                "v4": [1.000001, 1,1,1]
+            }
+        ))
+
+    def test_defaults(self):
+        assert_frame_equal(
+            pp.RemoveConstantColumns().fit_transform(self.df),
+            pd.DataFrame(OrderedDict(
+                {
+                    "v2": [1,2,3,4],
+                    "v4": [1.000001, 1,1,1]
+                }
+            ))
+        )

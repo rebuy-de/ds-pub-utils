@@ -25,6 +25,17 @@ def _is_cols_input_valid(cols):
         return True
 
 
+class RemoveConstantColumns(TransformerMixin):
+
+    def transform(self, df, **transform_params):
+        check_is_fitted(self, 'const_cols')
+        return df.drop(self.const_cols, axis=1)
+
+    def fit(self, df, y=None, **fit_params):
+        self.const_cols = df.loc[:, df.apply(pd.Series.nunique) == 1].columns
+        return self
+
+
 class ColumnsOneHotEncoder(BaseEstimator, TransformerMixin):
     """Batch One-Hot-Encode a collection of columns, all sharing the same number of values
 
