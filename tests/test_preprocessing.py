@@ -112,3 +112,11 @@ class TestRemoveConstantColumns(unittest.TestCase):
                 }
             ))
         )
+
+    def test_const_cols_attr(self):
+        rcc = pp.RemoveConstantColumns()
+        rcc.fit(self.df)
+        self.assertListEqual(
+            rcc.const_cols.tolist(),
+            ["v1", "v3"]
+        )
