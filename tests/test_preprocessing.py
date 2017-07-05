@@ -50,7 +50,11 @@ class TestStandartizeFloatCols(unittest.TestCase):
 
     def setUp(self):
         self.v1 = np.array([1., 2., 3.])
+        self.v1_mean = self.v1.mean()
+        self.v1_std  = self.v1.std()
         self.v2 = np.array([1., 4., 8.])
+        self.v2_mean = self.v2.mean()
+        self.v2_std  = self.v2.std()
         self.arr = np.array([self.v1,self.v2]).T
         self.df = pd.DataFrame({
             'v1': self.v1,
@@ -80,6 +84,37 @@ class TestStandartizeFloatCols(unittest.TestCase):
                         self.v1.reshape(-1, 1)).reshape(1, -1)[0]
                 ]
             ).T
+        )
+
+    def test_fit_on_self_transform_on_another(self):
+        """This test stress the intended behavior that the class
+        can be trained on one data set X and using the fitting transfrom
+        a different data set X'
+        """
+
+        sfc = pp.StandartizeFloatCols(cols=['v1', 'v2'])
+        sfc.fit(self.df)
+
+        v1 = np.array([1.,1.,1.])
+        v2 = np.array([5.,5.,5.])
+
+        new_df = pd.DataFrame(
+            {
+                'v1': v1,
+                'v2': v2
+            }
+        )
+
+        expected_res = pd.DataFrame(
+            {
+                'v1': (v1 - self.v1_mean) / self.v1_std,
+                'v2': (v2 - self.v2_mean) / self.v2_std
+            }
+        )
+
+        assert_frame_equal(
+            sfc.transform(new_df),
+            expected_res
         )
 
     def test_errors(self):
