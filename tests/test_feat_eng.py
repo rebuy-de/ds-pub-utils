@@ -156,6 +156,16 @@ class TestRatioColumnToValue(unittest.TestCase):
         ))
         assert_frame_equal(res2, expected_res2)
 
+    def test_Errors(self):
+        self.assertRaises(ValueError, fe.RatioColumnToValue)
+        self.assertRaises(ValueError, fe.RatioColumnToValue, col='foo')
+        self.assertRaises(ValueError, fe.RatioColumnToValue, func='foo')
+        rctv = fe.RatioColumnToValue(col='foo', func='mean')
+        rctv.const_ = 'foo'
+        self.assertRaises(ValueError, rctv.transform,list())
+        self.assertRaises(ValueError, fe.RatioColumnToValue(col='foo', func='mean').fit, list())
+        self.assertRaises(ValueError, fe.RatioColumnToValue(col='foo', func='bar').fit, pd.DataFrame())
+
 
 class TestDaysFromLaterToEarly(unittest.TestCase):
 
@@ -353,3 +363,6 @@ class TestSelectColumns(unittest.TestCase):
             columns=['foo', 'bar', 'goo', 'hello', 'world']
         )[['foo', 'bar']]
         assert_frame_equal(res, expected_res)
+
+    def test_Errors(self):
+        self.assertRaises(ValueError, fe.SelectColumns)
