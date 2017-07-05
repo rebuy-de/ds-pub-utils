@@ -65,7 +65,7 @@ class RatioColumnToValue(BaseEstimator, TransformerMixin):
     """
 
     def __init__(self, col=None, func=None, feat_name=None):
-        if col is None and func is None:
+        if col is None or func is None:
             raise ValueError("Both col and func have to be provided")
         self.col = col
         self.func = func
@@ -83,14 +83,16 @@ class RatioColumnToValue(BaseEstimator, TransformerMixin):
         return df
 
     def fit(self, df, y=None, **fit_params):
+        if not isinstance(df, pd.DataFrame):
+            raise ValueError("Non supported input")
         if self.func == 'mean':
             self.const_ = df[self.col].mean()
         elif self.func == 'median':
             self.const_ = df[self.col].median()
         else:
             raise ValueError(
-                "Unsupported function ({}). Can be either mean or median"
-                ).format(self.func)
+                "Unsupported function ({}). Can be either mean or median".format(self.func)
+                )
         return self
 
 
@@ -171,6 +173,7 @@ class SelectColumns(BaseEstimator, TransformerMixin):
         self.cols = cols
 
     def transform(self, df, **transform_params):
+        # TODO add a test that self.cols is a subset of the columns if df
         return df[self.cols].copy()
 
     def fit(self, df, y=None, **fit_params):
