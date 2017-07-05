@@ -2,6 +2,7 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils.validation import check_is_fitted
 import pandas as pd
 import numpy as np
+import pubdsutils as pdu
 
 class RatioBetweenColumns(BaseEstimator, TransformerMixin):
     """Adds a column (or attribute) holding the ratio between
@@ -77,6 +78,7 @@ class RatioColumnToValue(BaseEstimator, TransformerMixin):
         check_is_fitted(self, 'const_')
         df = df.copy()
         if isinstance(df, pd.DataFrame):
+            pdu._is_cols_subset_of_df_cols([self.col], df)
             df[self.feat_name] = df[self.col].div(self.const_)
         else:
             raise ValueError("Non supported input")
@@ -85,6 +87,7 @@ class RatioColumnToValue(BaseEstimator, TransformerMixin):
     def fit(self, df, y=None, **fit_params):
         if not isinstance(df, pd.DataFrame):
             raise ValueError("Non supported input")
+        pdu._is_cols_subset_of_df_cols([self.col], df)
         if self.func == 'mean':
             self.const_ = df[self.col].mean()
         elif self.func == 'median':
@@ -132,6 +135,7 @@ class DayOfTheWeekForColumn(BaseEstimator, TransformerMixin):
     def transform(self, df, **transform_params):
         df = df.copy()
         if isinstance(df, pd.DataFrame):
+            pdu._is_cols_subset_of_df_cols([self.col], df)
             df[self.feat_name] = df[self.col].apply(
                 lambda x: x.dayofweek).astype('category')
         else:
@@ -139,6 +143,7 @@ class DayOfTheWeekForColumn(BaseEstimator, TransformerMixin):
         return df
 
     def fit(self, df, y=None, **fit_params):
+        pdu._is_cols_subset_of_df_cols([self.col], df)
         return self
 
 
@@ -155,6 +160,7 @@ class HourOfTheDayForColumn(BaseEstimator, TransformerMixin):
     def transform(self, df, **transform_params):
         df = df.copy()
         if isinstance(df, pd.DataFrame):
+            pdu._is_cols_subset_of_df_cols([self.col,], df)
             df[self.feat_name] = df[self.col].apply(
                 lambda x: x.hour).astype('category')
         else:
@@ -162,19 +168,21 @@ class HourOfTheDayForColumn(BaseEstimator, TransformerMixin):
         return df
 
     def fit(self, df, y=None, **fit_params):
+        pdu._is_cols_subset_of_df_cols([self.col,], df)
         return self
 
 
 class SelectColumns(BaseEstimator, TransformerMixin):
 
     def __init__(self, cols=None):
-        if cols is None:
-            raise ValueError("List of columns cols must be provided. Currently None")
+        pdu._is_cols_input_valid(cols)
         self.cols = cols
 
     def transform(self, df, **transform_params):
         # TODO add a test that self.cols is a subset of the columns if df
+        pdu._is_cols_subset_of_df_cols(self.cols, df)
         return df[self.cols].copy()
 
     def fit(self, df, y=None, **fit_params):
+        pdu._is_cols_subset_of_df_cols(self.cols, df)
         return self

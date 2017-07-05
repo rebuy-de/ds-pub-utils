@@ -7,22 +7,7 @@ from sklearn.utils.validation import check_is_fitted
 import pandas as pd
 import numpy as np
 
-
-def _is_cols_subset_of_df_cols(cols, df):
-    if set(cols).issubset(set(df.columns)):
-        return True
-    else:
-        raise ValueError(
-            "Class instantiated with columns that don't appear in the data frame"
-        )
-
-
-def _is_cols_input_valid(cols):
-    if cols is None or not isinstance(cols, list) or len(cols) == 0 or not all(isinstance(col, str) for col in cols):
-        raise ValueError(
-            "Cols should be a list of strings. Each string should correspond to a column name")
-    else:
-        return True
+import pubdsutils as pdu
 
 
 class RemoveConstantColumns(TransformerMixin):
@@ -55,7 +40,7 @@ class ColumnsOneHotEncoder(BaseEstimator, TransformerMixin):
             raise ValueError("Both cols and n_values have to be specified")
         if not isinstance(n_values, int):
             raise ValueError("n_values should be an integer")
-        _is_cols_input_valid(cols)
+        pdu._is_cols_input_valid(cols)
         self.cols = cols
         self.n_values = n_values
         self.ohe = OneHotEncoder(n_values=self.n_values)
@@ -72,7 +57,7 @@ class ColumnsOneHotEncoder(BaseEstimator, TransformerMixin):
         return pd.concat([df.drop(self.cols, axis=1), ohe_cols_df], axis=1)
 
     def fit(self, df, y=None, **fit_params):
-        _is_cols_subset_of_df_cols(self.cols, df)
+        pdu._is_cols_subset_of_df_cols(self.cols, df)
         self.ohe.fit(df[self.cols])
         self.ohe_cols_names_ = []
 
@@ -90,7 +75,7 @@ class StandartizeFloatCols(BaseEstimator, TransformerMixin):
     """
 
     def __init__(self, cols=None):
-        _is_cols_input_valid(cols)
+        pdu._is_cols_input_valid(cols)
         self.cols = cols
         self.standard_scaler = StandardScaler()
         self._is_fitted = False
@@ -98,7 +83,7 @@ class StandartizeFloatCols(BaseEstimator, TransformerMixin):
     def transform(self, df, **transform_params):
         if not self._is_fitted:
             raise NotFittedError("Fitting was not preformed")
-        _is_cols_subset_of_df_cols(self.cols, df)
+        pdu._is_cols_subset_of_df_cols(self.cols, df)
 
         df = df.copy()
 
@@ -117,7 +102,7 @@ class StandartizeFloatCols(BaseEstimator, TransformerMixin):
         return df
 
     def fit(self, df, y=None, **fit_params):
-        _is_cols_subset_of_df_cols(self.cols, df)
+        pdu._is_cols_subset_of_df_cols(self.cols, df)
         self.standard_scaler.fit(df[self.cols])
         self._is_fitted = True
         return self
