@@ -5,7 +5,6 @@ from sklearn.exceptions import NotFittedError
 
 from sklearn.utils.validation import check_is_fitted
 import pandas as pd
-import numpy as np
 
 import pubdsutils as pdu
 
@@ -22,10 +21,10 @@ class RemoveConstantColumns(TransformerMixin):
 
 
 class ColumnsOneHotEncoder(BaseEstimator, TransformerMixin):
-    """Batch One-Hot-Encode a collection of columns, all sharing the same number of values
+    """Batch One-Hot-Encode a set of columns, all with the same number of values
 
-    This class is designed to be used when the DataFrame contains one or more columns
-    containing categorical data of the same type. For example:
+    This class is designed to be used when the DataFrame contains one or more
+    columns containing categorical data of the same type. For example:
 
     - Order's day of the week
     - Shipping's day of the week.

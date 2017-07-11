@@ -172,6 +172,9 @@ class TestRatioColumnToValue(unittest.TestCase):
         self.assertRaises(
             ValueError,
             fe.RatioColumnToValue(col='foo', func='bar').fit, self.df)
+        self.assertRaises(
+            ValueError,
+            fe.RatioColumnToValue(col='v1', func='bar').fit, self.df)
 
         rct = fe.RatioColumnToValue(col='v1', func='mean')
         rct.fit(self.df)

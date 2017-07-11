@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def value_counts_comb(s, sort=True, ascending=False,
                       bins=None, dropna=True):
     """
@@ -29,11 +30,9 @@ def value_counts_comb(s, sort=True, ascending=False,
     -------
     counts : DataFrame
     """
-    from pandas.core.algorithms import value_counts
-    from pandas.core.reshape.concat import concat
-    res_norm = value_counts(s, sort=sort, ascending=ascending,
-                  normalize=True, bins=bins, dropna=dropna)
-    res_regu = value_counts(s, sort=sort, ascending=ascending,
-                  normalize=False, bins=bins, dropna=dropna)
-    result = concat([res_norm, res_regu], axis=1, keys=['Ratio', 'Count'])
+    res_norm = s.value_counts(sort=sort, ascending=ascending,
+                              normalize=True, bins=bins, dropna=dropna)
+    res_regu = s.value_counts(sort=sort, ascending=ascending,
+                              normalize=False, bins=bins, dropna=dropna)
+    result = pd.concat([res_norm, res_regu], axis=1, keys=['Ratio', 'Count'])
     return result

@@ -1,8 +1,8 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.utils.validation import check_is_fitted
 import pandas as pd
-import numpy as np
 import pubdsutils as pdu
+
 
 class RatioBetweenColumns(BaseEstimator, TransformerMixin):
     """Adds a column (or attribute) holding the ratio between
@@ -94,7 +94,8 @@ class RatioColumnToValue(BaseEstimator, TransformerMixin):
             self.const_ = df[self.col].median()
         else:
             raise ValueError(
-                "Unsupported function ({}). Can be either mean or median".format(self.func)
+                "Unsupported function ({}). Can be either mean or "
+                "median".format(self.func)
                 )
         return self
 
@@ -113,7 +114,8 @@ class DaysFromLaterToEarly(BaseEstimator, TransformerMixin):
     def transform(self, df, **transform_params):
         df = df.copy()
         if isinstance(df, pd.DataFrame):
-            df[self.feat_name] = (df[self.end] - df[self.start]).apply(lambda x: x.days)
+            df[self.feat_name] = (df[self.end] - df[self.start]).apply(
+                lambda x: x.days)
         else:
             raise ValueError("Non supported input")
         return df
@@ -160,7 +162,7 @@ class HourOfTheDayForColumn(BaseEstimator, TransformerMixin):
     def transform(self, df, **transform_params):
         df = df.copy()
         if isinstance(df, pd.DataFrame):
-            pdu._is_cols_subset_of_df_cols([self.col,], df)
+            pdu._is_cols_subset_of_df_cols([self.col, ], df)
             df[self.feat_name] = df[self.col].apply(
                 lambda x: x.hour).astype('category')
         else:
@@ -168,7 +170,7 @@ class HourOfTheDayForColumn(BaseEstimator, TransformerMixin):
         return df
 
     def fit(self, df, y=None, **fit_params):
-        pdu._is_cols_subset_of_df_cols([self.col,], df)
+        pdu._is_cols_subset_of_df_cols([self.col, ], df)
         return self
 
 

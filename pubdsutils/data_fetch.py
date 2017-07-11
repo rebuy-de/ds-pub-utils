@@ -36,6 +36,7 @@ def from_sql_sever(config_file, query=None):
     df = pd.read_sql(query, conn)
     return df
 
+
 def persist_df(df, path=None, sql=None, prefix='raw_df'):
     """Pickles a DataFrame and assigns hash to the filename
 
@@ -53,10 +54,10 @@ def persist_df(df, path=None, sql=None, prefix='raw_df'):
     df_hash = sha256(df.to_json().encode()).hexdigest()
     base_filename = '{}_{}_{}'.format(
         prefix,
-        pd.datetime.now().isoformat().replace(":","-").replace(".","-"),
+        pd.datetime.now().isoformat().replace(":", "-").replace(".", "-"),
         df_hash)
     if path is not None:
         base_filename = path + base_filename
-    df.to_pickle(base_filename+'.pickle')
-    with open(base_filename+".sql", "w") as sql_file:
+    df.to_pickle(base_filename + '.pickle')
+    with open(base_filename + ".sql", "w") as sql_file:
         print(sql, file=sql_file)
