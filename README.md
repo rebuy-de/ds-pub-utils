@@ -32,3 +32,10 @@ Utilities for data fetching
 0. (Optional but recommended) Start a new virtual environment. For example using `conda create --name test-this python=3`
 1. Clone the repository
 2. Run `python setup.py install`. To be on a safer side, install using `python setup.py install --record files.txt`. The produced `files.txt` can be later used for [uninstalling the package](https://stackoverflow.com/a/1550235/671013).
+
+# Maintaining issues:
+
+* Use `flake8 --exclude=build` to check that the code is well styled
+* Use `pytest --cov-report term-missing --cov=pubdsutils tests/` to check the tests coverage
+* Execute `sphinx-apidoc -f -o . ../pubdsutils/` from `./docs` when adding/removing module/packages
+* `make html` from `./docs` will generate the documentation
