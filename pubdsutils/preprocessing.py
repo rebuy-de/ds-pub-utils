@@ -1,3 +1,10 @@
+"""
+Preprocessing utilities for pandas.DataFrame_ which plays nicely with
+scikit-learn
+
+.. _pandas.DataFrame : https://is.gd/GdHbXc
+"""
+
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
@@ -10,12 +17,38 @@ import pubdsutils as pdu
 
 
 class RemoveConstantColumns(TransformerMixin):
+    """
+    Identify constant columns and enable their removal
+
+    Attributes
+    ----------
+    const_cols : list
+        The list of column name which are constant
+    """
 
     def transform(self, df, **transform_params):
+        """
+        Returns a copy of ``df`` where the constant columns (as identified)
+        during the ``fit`` are removed
+
+        Parameters
+        ----------
+        df : DataFrame
+            Should have the same columns as those of the DataFrame used at
+            fitting.
+        """
         check_is_fitted(self, 'const_cols')
         return df.drop(self.const_cols, axis=1)
 
     def fit(self, df, y=None, **fit_params):
+        """
+        Identify the constant columns
+
+        Parameters
+        ----------
+        df : DataFrame
+            Data from which constant features are identified
+        """
         self.const_cols = df.loc[:, df.apply(pd.Series.nunique) == 1].columns
         return self
 
@@ -32,6 +65,15 @@ class ColumnsOneHotEncoder(BaseEstimator, TransformerMixin):
     In this example, both columns have 7 possible values, and can/should be
     encoded using OneHotEncoder. This class assists in doing so when having the
     data as a `pandas.DataFrame`.
+
+    Attributes
+    ----------
+    cols : list
+        List of categorical columns to be One-Hot-Encoded.
+    n_values : int
+        Number of values (see sklearn.preprocessing.OneHotEncoder_ for more details)
+
+        .. _sklearn.preprocessing.OneHotEncoder : http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html
     """
 
     def __init__(self, cols=None, n_values=None):
@@ -45,6 +87,15 @@ class ColumnsOneHotEncoder(BaseEstimator, TransformerMixin):
         self.ohe = OneHotEncoder(n_values=self.n_values)
 
     def transform(self, df, y=None, **trans_param):
+        """
+        Returns a copy of ``df`` where ``cols`` are replaced with their
+        One-Hot-Encoding
+
+        Parameters
+        ----------
+        df : DataFrame
+            DataFrame to transform
+        """
         check_is_fitted(self, 'ohe_cols_names_')
         df = df.copy()
         ohe_cols_arr = self.ohe.transform(df[self.cols]).toarray()
@@ -56,6 +107,15 @@ class ColumnsOneHotEncoder(BaseEstimator, TransformerMixin):
         return pd.concat([df.drop(self.cols, axis=1), ohe_cols_df], axis=1)
 
     def fit(self, df, y=None, **fit_params):
+        """
+        Fitting the instance on ``df``
+
+        Parameters
+        ----------
+        df : DataFrame
+            The base DataFrame from which column names are learned.
+            These names will be used when transforming data
+        """
         pdu._is_cols_subset_of_df_cols(self.cols, df)
         self.ohe.fit(df[self.cols])
         self.ohe_cols_names_ = []
@@ -70,7 +130,15 @@ class ColumnsOneHotEncoder(BaseEstimator, TransformerMixin):
 class StandartizeFloatCols(BaseEstimator, TransformerMixin):
     """Standard-scale the columns in the data frame.
 
-    `cols` should be a list of columns in the data.
+
+    Apply sklearn.preprocessing.StandardScaler_ to `cols`
+
+    .. _sklearn.preprocessing.StandardScaler : http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html
+
+    Attributes
+    ----------
+    cols : list
+        List of columns in the data to be scaled
     """
 
     def __init__(self, cols=None):
@@ -80,6 +148,14 @@ class StandartizeFloatCols(BaseEstimator, TransformerMixin):
         self._is_fitted = False
 
     def transform(self, df, **transform_params):
+        """
+        Scaling ``cols`` of ``df`` using the fitting
+
+        Parameters
+        ----------
+        df : DataFrame
+            DataFrame to be preprocessed
+        """
         if not self._is_fitted:
             raise NotFittedError("Fitting was not preformed")
         pdu._is_cols_subset_of_df_cols(self.cols, df)
@@ -101,6 +177,15 @@ class StandartizeFloatCols(BaseEstimator, TransformerMixin):
         return df
 
     def fit(self, df, y=None, **fit_params):
+        """
+        Fitting the preprocessing
+
+        Parameters
+        ----------
+        df : DataFrame
+            Data to use for fitting.
+            In many cases, should be ``X_train``.
+        """
         pdu._is_cols_subset_of_df_cols(self.cols, df)
         self.standard_scaler.fit(df[self.cols])
         self._is_fitted = True
