@@ -59,5 +59,6 @@ def persist_df(df, path=None, sql=None, prefix='raw_df'):
     if path is not None:
         base_filename = path + base_filename
     df.to_pickle(base_filename + '.pickle')
-    with open(base_filename + ".sql", "w") as sql_file:
-        print(sql, file=sql_file)
+    if sql is not None:
+        with open(base_filename + ".sql", "w") as sql_file:
+            print(sql, file=sql_file)
