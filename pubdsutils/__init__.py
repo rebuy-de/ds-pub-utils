@@ -6,8 +6,10 @@ def _is_cols_subset_of_df_cols(cols, df):
         return True
     else:
         raise ValueError(
-            "Class instantiated with columns that don't appear in the data frame"
+            "Class instantiated with columns that don't appear in the "
+            "data frame"
         )
+
 
 def _is_cols_input_valid(cols):
     """Utility function checking the validity of the cols parameter.
@@ -19,8 +21,12 @@ def _is_cols_input_valid(cols):
     - Of type list having at least one item
     - All items in the list are strings
     """
-    if cols is None or not isinstance(cols, list) or len(cols) == 0 or not all(isinstance(col, str) for col in cols):
+    if (
+        cols is None or not isinstance(cols, list) or
+        len(cols) == 0 or not all(isinstance(col, str) for col in cols)
+    ):
         raise ValueError(
-            "Cols should be a list of strings. Each string should correspond to a column name")
+            "Cols should be a list of strings. Each string should correspond "
+            "to a column name")
     else:
         return True

@@ -71,9 +71,10 @@ class ColumnsOneHotEncoder(BaseEstimator, TransformerMixin):
     cols : list
         List of categorical columns to be One-Hot-Encoded.
     n_values : int
-        Number of values (see sklearn.preprocessing.OneHotEncoder_ for more details)
+        Number of values (see sklearn.preprocessing.OneHotEncoder_ for
+        more details)
 
-        .. _sklearn.preprocessing.OneHotEncoder : http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html
+        .. _sklearn.preprocessing.OneHotEncoder : https://is.gd/Qi1YFg
     """
 
     def __init__(self, cols=None, n_values=None):
@@ -133,7 +134,7 @@ class StandartizeFloatCols(BaseEstimator, TransformerMixin):
 
     Apply sklearn.preprocessing.StandardScaler_ to `cols`
 
-    .. _sklearn.preprocessing.StandardScaler : http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html
+    .. _sklearn.preprocessing.StandardScaler : https://is.gd/cdMuLr
 
     Attributes
     ----------

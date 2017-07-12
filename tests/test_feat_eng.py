@@ -92,7 +92,8 @@ class TestRatioColumnToConst(unittest.TestCase):
         self.assertRaises(ValueError, fe.RatioColumnToConst)
         self.assertRaises(ValueError, fe.RatioColumnToConst, const=3)
         self.assertRaises(ValueError,
-                          fe.RatioColumnToConst(col='a', const=4).transform, [1, 2, 3])
+                          fe.RatioColumnToConst(col='a', const=4).transform,
+                          [1, 2, 3])
 
 
 class TestRatioColumnToValue(unittest.TestCase):
@@ -162,7 +163,7 @@ class TestRatioColumnToValue(unittest.TestCase):
         self.assertRaises(ValueError, fe.RatioColumnToValue, func='foo')
         rctv = fe.RatioColumnToValue(col='foo', func='mean')
         rctv.const_ = 'foo'
-        self.assertRaises(ValueError, rctv.transform,list())
+        self.assertRaises(ValueError, rctv.transform, list())
         self.assertRaises(
             ValueError,
             fe.RatioColumnToValue(col='foo', func='mean').fit, list())
@@ -179,7 +180,7 @@ class TestRatioColumnToValue(unittest.TestCase):
         rct = fe.RatioColumnToValue(col='v1', func='mean')
         rct.fit(self.df)
         self.assertRaises(
-            ValueError, rct.transform, pd.DataFrame({"foo": [1,2,3]}))
+            ValueError, rct.transform, pd.DataFrame({"foo": [1, 2, 3]}))
 
 
 class TestDaysFromLaterToEarly(unittest.TestCase):
@@ -301,7 +302,8 @@ class TestDayOfTheWeekForColumn(unittest.TestCase):
     def test_Errors(self):
         self.assertRaises(ValueError, fe.DayOfTheWeekForColumn)
         self.assertRaises(
-            ValueError, fe.DayOfTheWeekForColumn(col='foo').transform, [1, 2, 3])
+            ValueError, fe.DayOfTheWeekForColumn(col='foo').transform,
+            [1, 2, 3])
         self.assertRaises(
             ValueError, fe.DayOfTheWeekForColumn(col='foo').fit, self.df)
         self.assertRaises(
@@ -361,11 +363,12 @@ class TestHourOfTheDayForColumn(unittest.TestCase):
     def test_Errors(self):
         self.assertRaises(ValueError, fe.HourOfTheDayForColumn)
         self.assertRaises(
-            ValueError, fe.HourOfTheDayForColumn(col='foo').transform, [1, 2, 3])
+            ValueError, fe.HourOfTheDayForColumn(col='foo').transform,
+            [1, 2, 3])
         self.assertRaises(
-            ValueError, fe.HourOfTheDayForColumn(col='foo').transform,self.df)
+            ValueError, fe.HourOfTheDayForColumn(col='foo').transform, self.df)
         self.assertRaises(
-            ValueError, fe.HourOfTheDayForColumn(col='foo').fit,self.df)
+            ValueError, fe.HourOfTheDayForColumn(col='foo').fit, self.df)
 
 
 class TestSelectColumns(unittest.TestCase):

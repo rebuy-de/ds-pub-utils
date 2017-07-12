@@ -1,6 +1,5 @@
 import unittest
 import pandas as pd
-import numpy as np
 from pandas.testing import assert_frame_equal
 from pubdsutils import features_engineering as fe
 from collections import OrderedDict

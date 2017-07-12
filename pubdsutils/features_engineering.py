@@ -176,7 +176,7 @@ class RatioColumnToValue(BaseEstimator, TransformerMixin):
             raise ValueError(
                 "Unsupported function ({}). Can be either mean or "
                 "median".format(self.func)
-                )
+            )
         return self
 
 
@@ -237,6 +237,7 @@ class DayOfTheWeekForColumn(BaseEstimator, TransformerMixin):
         Column name of the new featrue. If ``None`` a default name
         ``col_DayOfTheWeek`` will be used
     """
+
     def __init__(self, col=None, feat_name=None):
         if col is None:
             raise ValueError("col name must be provided")
@@ -280,6 +281,7 @@ class HourOfTheDayForColumn(BaseEstimator, TransformerMixin):
         Column name of the new featrue. If ``None`` a default name
         ``col_HourOfTheDay`` will be used
     """
+
     def __init__(self, col=None, feat_name=None):
         if col is None:
             raise ValueError("col must be provided")
@@ -320,6 +322,7 @@ class SelectColumns(BaseEstimator, TransformerMixin):
     cols : list
         List of column names to be selected
     """
+
     def __init__(self, cols=None):
         pdu._is_cols_input_valid(cols)
         self.cols = cols

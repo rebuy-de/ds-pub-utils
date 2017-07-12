@@ -1,9 +1,7 @@
 import unittest
 import pandas as pd
-import numpy as np
 from pandas.testing import assert_frame_equal
 from pubdsutils import calcs as ca
-from collections import OrderedDict
 
 
 class TestValueCounts(unittest.TestCase):
