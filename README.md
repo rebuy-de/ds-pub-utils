@@ -1,8 +1,8 @@
-[![logo](./docs/img/reBuy-logo.png)](https://www.rebuy.com)
+[![logo](./docs/img/reBuy-logo.png)](http://www.rebuy.com)
 
 ------
 
-# Public Data Science Utilities @ [reBuy](https://www.rebuy.com)
+# Public Data Science Utilities @ [reBuy](http://www.rebuy.com)
 
 ## Warning / License
 
