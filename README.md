@@ -4,6 +4,8 @@
 
 # Public Data Science Utilities @ [reBuy](http://www.rebuy.com)
 
+Write to us: datascience@rebuy.com
+
 ## Warning / License
 
 This package is, by and large, under active development and *nothing* should be taken here for granted.
