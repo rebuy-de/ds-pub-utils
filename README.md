@@ -13,6 +13,8 @@ It is intended to be used as part of other, internal, workflows.
 Therefore, it is *very* likely that changes will occur.
 It is available under the [MIT license](./license.md).
 
+Lastly, this is a public repository; _**DO NOT INCLUDE ANY BUSINESS LOGIC NOR DATA NOR ANYTHING CONFIDENTIAL!**_
+
 ## Provided Modules
 
 ### `features_engineering`
