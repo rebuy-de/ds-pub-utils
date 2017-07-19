@@ -13,6 +13,8 @@ It is intended to be used as part of other, internal, workflows.
 Therefore, it is *very* likely that changes will occur.
 It is available under the [MIT license](./license.md).
 
+Lastly, this is a public repository; _**DO NOT INCLUDE ANY BUSINESS LOGIC NOR DATA NOR ANYTHING CONFIDENTIAL!**_
+
 ## Provided Modules
 
 ### `features_engineering`
@@ -31,9 +33,19 @@ Utilities for data fetching
 
 ## Installation
 
-0. (Optional but recommended) Start a new virtual environment. For example using `conda create --name test-this python=3`
+0. (Optional but recommended) Start a new virtual environment.
+    1. Either using `conda create --name test-this python=3`. The package needs Python 3.x.
+    2. Or, use the provided `environment.yml`.
 1. Clone the repository
-2. Run `python setup.py install`. To be on a safer side, install using `python setup.py install --record files.txt`. The produced `files.txt` can be later used for [uninstalling the package](https://stackoverflow.com/a/1550235/671013).
+2. The package depends on [`pymssql`](http://pymssql.org/en/stable/intro.html#install) which in turn depends on  [`freetds`](http://pymssql.org/en/stable/freetds.html). Make sure you install this *before* the next step. [This SO thread](https://stackoverflow.com/q/17368964/671013) might be helpful as well
+2. Run `pip install -e .` from the directory of the package
+3. (Optional) you can run `pytest` from the root of the package and see if all tests passes
+
+## Uninstallation
+
+At `{virtualenv}/lib/python2.7/site-packages/` (if not using `virtualenv` then `{system_dir}/lib/python2.7/dist-packages/`) remove the egg file (e.g. `pubdsutils-0.6.34-py2.7.egg`) if there is any.
+From file `easy-install.pth`, remove the corresponding line (it should be a path to the source directory or of an egg file).
+Source is [SO answer](https://stackoverflow.com/a/18818891/671013).
 
 # Maintaining issues:
 
