@@ -4,12 +4,13 @@ import pymssql
 import configparser
 
 
-def from_sql_sever(config_file, query=None):
+def mssql_connector_from_ini(ini_file):
     """
-    Fetch data from MS SQL
+    Prepare MSSQL connector using an INI file
 
-    Query the MS SQL data warehouse using ``query`` and the settings
-    in the configuration file.
+    Read configurations from an INI file and construct a connector
+    to an MS SQL server.
+
     Following is an example of the config file as ``.ini``.
 
     .. code-block:: ini
@@ -19,8 +20,47 @@ def from_sql_sever(config_file, query=None):
         domain = DOMAIN
         username = user.name
         password = yourpassword
+        port = 1234 # if missing falls back to 1433
 
     *Note* that this ``.ini`` contains your password! Be careful.
+
+    Parameters
+    ----------
+    ini_file : str
+        Path to the INI file
+
+    Returns
+    -------
+    pymssql.Connection_
+        Connection
+
+        .. _pymssql.Connection : \
+        http://pymssql.org/en/stable/ref/pymssql.html#pymssql.Connection
+    """
+    config = configparser.ConfigParser()
+    config.read(ini_file)
+
+    try:
+        port = config['Base']['port']
+    except KeyError:
+        port = str(1433)
+
+    conn = pymssql.connect(
+        config['Base']['server'],
+        config['Base']['domain'] + '\\' + config['Base']['username'],
+        config['Base']['password'],
+        port=port)
+    return conn
+
+
+def from_sql_sever(config_file, query=None):
+    """
+    Fetch data from MS SQL
+
+    Query the MS SQL data warehouse using ``query`` and the settings
+    in the configuration file.
+    The configuration file is passed and processed by
+    :func:`~pubdsutils.data_fetch.mssql_connector_from_ini`
 
     Parameters
     ----------
@@ -36,12 +76,7 @@ def from_sql_sever(config_file, query=None):
     config = configparser.ConfigParser()
     config.read(config_file)
 
-    conn = pymssql.connect(
-        config['Base']['server'],
-        config['Base']['domain'] + '\\' + config['Base']['username'],
-        config['Base']['password'],
-        port=1433
-    )
+    conn = mssql_connector_from_ini(config_file)
     if query is None:
         raise ValueError("query must be provided")
 
