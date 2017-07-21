@@ -65,21 +65,21 @@ class TestStandartizeFloatCols(unittest.TestCase):
 
     def test_both_columns(self):
         assert_array_equal(
-            pp.StandartizeFloatCols(
+            pp.StandardizeFloatCols(
                 cols=['v1', 'v2']).fit_transform(self.df).values,
             StandardScaler().fit_transform(self.arr)
         )
 
     def test_both_columns_df(self):
         assert_frame_equal(
-            pp.StandartizeFloatCols(cols=['v1', 'v2']).fit_transform(self.df),
+            pp.StandardizeFloatCols(cols=['v1', 'v2']).fit_transform(self.df),
             pd.DataFrame(StandardScaler().fit_transform(
                 self.arr), columns=['v1', 'v2'])
         )
 
     def test_one_col(self):
         assert_array_equal(
-            pp.StandartizeFloatCols(
+            pp.StandardizeFloatCols(
                 cols=['v1']).fit_transform(self.df).values,
             np.array(
                 [
@@ -96,7 +96,7 @@ class TestStandartizeFloatCols(unittest.TestCase):
         a different data set X'
         """
 
-        sfc = pp.StandartizeFloatCols(cols=['v1', 'v2'])
+        sfc = pp.StandardizeFloatCols(cols=['v1', 'v2'])
         sfc.fit(self.df)
 
         v1 = np.array([1., 1., 1.])
@@ -124,10 +124,10 @@ class TestStandartizeFloatCols(unittest.TestCase):
     def test_errors(self):
         self.assertRaises(
             NotFittedError,
-            pp.StandartizeFloatCols(cols=['v1']).transform, self.df)
-        self.assertRaises(ValueError, pp.StandartizeFloatCols)
-        self.assertRaises(ValueError, pp.StandartizeFloatCols, cols=[1, ])
-        self.assertRaises(ValueError, pp.StandartizeFloatCols(
+            pp.StandardizeFloatCols(cols=['v1']).transform, self.df)
+        self.assertRaises(ValueError, pp.StandardizeFloatCols)
+        self.assertRaises(ValueError, pp.StandardizeFloatCols, cols=[1, ])
+        self.assertRaises(ValueError, pp.StandardizeFloatCols(
             cols=['v3']).fit, self.df)
 
 

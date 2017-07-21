@@ -129,7 +129,7 @@ class ColumnsOneHotEncoder(BaseEstimator, TransformerMixin):
         return self
 
 
-class StandartizeFloatCols(BaseEstimator, TransformerMixin):
+class StandardizeFloatCols(BaseEstimator, TransformerMixin):
     """Standard-scale the columns in the data frame.
 
 
