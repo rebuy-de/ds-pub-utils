@@ -23,7 +23,8 @@ class RemoveConstantColumns(TransformerMixin):
     Attributes
     ----------
     const_cols : list
-        The list of column name which are constant
+        The list of column names which are constant.
+        List may be of length 1.
     """
 
     def transform(self, df, **transform_params):

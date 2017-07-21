@@ -20,7 +20,7 @@ class RatioBetweenColumns(BaseEstimator, TransformerMixin):
     denom : str
         Column name of the denominator
     feat_name : str (default None)
-        Column name of the new featrue. If ``None`` a default name
+        Column name of the new feature. If ``None`` a default name
         ``numerTOdenomRatio`` will be used
     """
 
@@ -57,7 +57,7 @@ class RatioColumnToConst(BaseEstimator, TransformerMixin):
     """
     Ratio between a column and a constant
 
-    Adds a column (or attribute) holding the ration between a column of
+    Adds a column (or attribute) holding the ratio between a column of
     a DataFrame (or an attribute of a Series) and a constant value
 
     Returns a *copy* of the input.
@@ -69,7 +69,7 @@ class RatioColumnToConst(BaseEstimator, TransformerMixin):
     const : numerical value
         Value of the denominator
     feat_name : str (default None)
-        Column name of the new featrue. If ``None`` a default name
+        Column name of the new feature. If ``None`` a default name
         ``colTOconstRatio`` will be used
     """
 
@@ -108,13 +108,13 @@ class RatioColumnToValue(BaseEstimator, TransformerMixin):
     or `median`
 
     An instance has to fitted; at this step the ``func`` is applied to the
-    column ``col`` and the result is stored in ``cosnt_``.
+    column ``col`` and the result is stored in ``const_``.
     Then, ``const_`` is used to computed the ratio.
 
     Assume you have ``X_train`` and ``y_train``.
     Furthermore, ``X_train`` has a feature ``val``.
     Say that you want to obtain a new feature which is the ratio between
-    ``X_train.val`` its mean.
+    ``X_train.val`` and its mean.
     When preparing ``X_test``, the new feature has to be computed and the mean
     fitted from ``X_train`` has to be used.
     This class, bridges this gap.
@@ -134,7 +134,7 @@ class RatioColumnToValue(BaseEstimator, TransformerMixin):
     func : str
         Function to use. Support either `mean` or `median`
     feat_name : str (default None)
-        Column name of the new featrue. If ``None`` a default name
+        Column name of the new feature. If ``None`` a default name
         ``col_RatioTo_func`` will be used
     """
 
@@ -191,7 +191,7 @@ class DaysFromLaterToEarly(BaseEstimator, TransformerMixin):
     end : str
         Column name of the later (end) date
     feat_name : str (default None)
-        Column name of the new featrue. If ``None`` a default name
+        Column name of the new feature. If ``None`` a default name
         ``DaysFrom_start_To_end`` will be used
     """
 
@@ -227,14 +227,14 @@ class DaysFromLaterToEarly(BaseEstimator, TransformerMixin):
 
 class DayOfTheWeekForColumn(BaseEstimator, TransformerMixin):
     """
-    Compute day-of-the-week of a coulmn
+    Compute day-of-the-week of a column
 
     Attributes
     ----------
     col : str
         Column name of the base feature (should be date)
     feat_name : str (default None)
-        Column name of the new featrue. If ``None`` a default name
+        Column name of the new feature. If ``None`` a default name
         ``col_DayOfTheWeek`` will be used
     """
 
@@ -271,14 +271,14 @@ class DayOfTheWeekForColumn(BaseEstimator, TransformerMixin):
 
 class HourOfTheDayForColumn(BaseEstimator, TransformerMixin):
     """
-    Compute hour-of-the-day of a coulmn
+    Compute hour-of-the-day of a column
 
     Attributes
     ----------
     col : str
         Column name of the base feature (should be date)
     feat_name : str (default None)
-        Column name of the new featrue. If ``None`` a default name
+        Column name of the new feature. If ``None`` a default name
         ``col_HourOfTheDay`` will be used
     """
 
