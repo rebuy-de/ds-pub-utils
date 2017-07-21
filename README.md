@@ -37,9 +37,12 @@ Utilities for data fetching
     1. Either using `conda create --name test-this python=3`. The package needs Python 3.x.
     2. Or, use the provided `environment.yml`.
 1. Clone the repository
-2. The package depends on [`pymssql`](http://pymssql.org/en/stable/intro.html#install) which in turn depends on  [`freetds`](http://pymssql.org/en/stable/freetds.html). Make sure you install this *before* the next step. [This SO thread](https://stackoverflow.com/q/17368964/671013) might be helpful as well
 2. Run `pip install -e .` from the directory of the package
 3. (Optional) you can run `pytest` from the root of the package and see if all tests passes
+
+Remark: The function `data_fetch.from_sql_sever` uses [`pymssql`](http://pymssql.org/en/stable/intro.html#install) which in turn depends on  [`freetds`](http://pymssql.org/en/stable/freetds.html).
+If you want to use this function, make sure you install `pymssql`.
+[This SO thread](https://stackoverflow.com/q/17368964/671013) might be helpful as well
 
 ## Uninstallation
 
