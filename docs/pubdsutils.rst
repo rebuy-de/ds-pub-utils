@@ -4,38 +4,12 @@ pubdsutils package
 Submodules
 ----------
 
-pubdsutils\.calcs module
-------------------------
+.. toctree::
 
-.. automodule:: pubdsutils.calcs
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pubdsutils\.data\_fetch module
-------------------------------
-
-.. automodule:: pubdsutils.data_fetch
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pubdsutils\.features\_engineering module
-----------------------------------------
-
-.. automodule:: pubdsutils.features_engineering
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pubdsutils\.preprocessing module
---------------------------------
-
-.. automodule:: pubdsutils.preprocessing
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
+   pubdsutils.calcs
+   pubdsutils.data_fetch
+   pubdsutils.features_engineering
+   pubdsutils.preprocessing
 
 Module contents
 ---------------
