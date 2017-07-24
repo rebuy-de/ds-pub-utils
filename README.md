@@ -4,7 +4,8 @@
 
 # Public Data Science Utilities @ [reBuy](http://www.rebuy.com)
 
-Write to us: datascience@rebuy.com
+* Documentation: https://rebuy-de.github.io/ds-pub-utils/
+* Write to us: datascience@rebuy.com
 
 ## Warning / License
 
