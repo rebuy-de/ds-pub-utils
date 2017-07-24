@@ -6,6 +6,8 @@
 dspubutils @ reBuy.com!
 =======================
 
+Source code can be found here: https://github.com/rebuy-de/ds-pub-utils
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
