@@ -40,7 +40,8 @@ Utilities for data fetching
 2. Run `pip install -e .` from the directory of the package
 3. (Optional) you can run `pytest` from the root of the package and see if all tests passes
 
-Remark: The function `data_fetch.from_sql_sever` uses [`pymssql`](http://pymssql.org/en/stable/intro.html#install) which in turn depends on  [`freetds`](http://pymssql.org/en/stable/freetds.html).
+### Remark on `pymssql`
+The function `data_fetch.from_sql_sever` uses [`pymssql`](http://pymssql.org/en/stable/intro.html#install) which in turn depends on  [`freetds`](http://pymssql.org/en/stable/freetds.html).
 If you want to use this function, make sure you install `pymssql`.
 [This SO thread](https://stackoverflow.com/q/17368964/671013) might be helpful as well
 
@@ -55,4 +56,6 @@ Source is [SO answer](https://stackoverflow.com/a/18818891/671013).
 * Use `flake8 --exclude=build` to check that the code is well styled
 * Use `pytest --cov-report term-missing --cov=pubdsutils tests/` to check the tests coverage
 * Execute `sphinx-apidoc -f -o . ../pubdsutils/` from `./docs` when adding/removing module/packages
-* `make html` from `./docs` will generate the documentation
+* **Documentation:**
+  * `make html` from `./docs` will generate the documentation.
+  * After building the docs, you can publish them (`./docs/_build/html`) to the `gh-pages` branch. Most easily, this can be done, by `ghp-import docs/_build/html/` from the project's root.
