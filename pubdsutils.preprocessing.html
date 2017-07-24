@@ -1,0 +1,265 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pubdsutils.preprocessing module &#8212; ds-pub-utils  documentation</title>
+    
+    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="pubdsutils.features_engineering module" href="pubdsutils.features_engineering.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.features_engineering.html" title="pubdsutils.features_engineering module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ds-pub-utils  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >pubdsutils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="pubdsutils.html" accesskey="U">pubdsutils package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pubdsutils.preprocessing">
+<span id="pubdsutils-preprocessing-module"></span><h1>pubdsutils.preprocessing module<a class="headerlink" href="#module-pubdsutils.preprocessing" title="Permalink to this headline">¶</a></h1>
+<p>Preprocessing utilities for <a class="reference external" href="https://is.gd/GdHbXc">pandas.DataFrame</a> which plays nicely with
+scikit-learn</p>
+<dl class="class">
+<dt id="pubdsutils.preprocessing.ColumnsOneHotEncoder">
+<em class="property">class </em><code class="descclassname">pubdsutils.preprocessing.</code><code class="descname">ColumnsOneHotEncoder</code><span class="sig-paren">(</span><em>cols=None</em>, <em>n_values=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.preprocessing.ColumnsOneHotEncoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Batch One-Hot-Encode a set of columns, all with the same number of values</p>
+<p>This class is designed to be used when the DataFrame contains one or more
+columns containing categorical data of the same type. For example:</p>
+<ul class="simple">
+<li>Order’s day of the week</li>
+<li>Shipping’s day of the week.</li>
+</ul>
+<p>In this example, both columns have 7 possible values, and can/should be
+encoded using OneHotEncoder. This class assists in doing so when having the
+data as a <cite>pandas.DataFrame</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cols</strong> (<em>list</em>) – List of categorical columns to be One-Hot-Encoded.</li>
+<li><strong>n_values</strong> (<em>int</em>) – <p>Number of values (see <a class="reference external" href="https://is.gd/Qi1YFg">sklearn.preprocessing.OneHotEncoder</a> for
+more details)</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pubdsutils.preprocessing.ColumnsOneHotEncoder.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>df</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.preprocessing.ColumnsOneHotEncoder.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fitting the instance on <code class="docutils literal"><span class="pre">df</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>df</strong> (<em>DataFrame</em>) – The base DataFrame from which column names are learned.
+These names will be used when transforming data</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pubdsutils.preprocessing.ColumnsOneHotEncoder.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>df</em>, <em>y=None</em>, <em>**trans_param</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.preprocessing.ColumnsOneHotEncoder.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of <code class="docutils literal"><span class="pre">df</span></code> where <code class="docutils literal"><span class="pre">cols</span></code> are replaced with their
+One-Hot-Encoding</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>df</strong> (<em>DataFrame</em>) – DataFrame to transform</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pubdsutils.preprocessing.RemoveConstantColumns">
+<em class="property">class </em><code class="descclassname">pubdsutils.preprocessing.</code><code class="descname">RemoveConstantColumns</code><a class="headerlink" href="#pubdsutils.preprocessing.RemoveConstantColumns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Identify constant columns and enable their removal</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>const_cols</strong> (<em>list</em>) – The list of column names which are constant.
+List may be of length 1.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pubdsutils.preprocessing.RemoveConstantColumns.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>df</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.preprocessing.RemoveConstantColumns.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identify the constant columns</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>df</strong> (<em>DataFrame</em>) – Data from which constant features are identified</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pubdsutils.preprocessing.RemoveConstantColumns.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>df</em>, <em>**transform_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.preprocessing.RemoveConstantColumns.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of <code class="docutils literal"><span class="pre">df</span></code> where the constant columns (as identified)
+during the <code class="docutils literal"><span class="pre">fit</span></code> are removed</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>df</strong> (<em>DataFrame</em>) – Should have the same columns as those of the DataFrame used at
+fitting.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pubdsutils.preprocessing.StandardizeFloatCols">
+<em class="property">class </em><code class="descclassname">pubdsutils.preprocessing.</code><code class="descname">StandardizeFloatCols</code><span class="sig-paren">(</span><em>cols=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.preprocessing.StandardizeFloatCols" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Standard-scale the columns in the data frame.</p>
+<p>Apply <a class="reference external" href="https://is.gd/cdMuLr">sklearn.preprocessing.StandardScaler</a> to <cite>cols</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>cols</strong> (<em>list</em>) – List of columns in the data to be scaled</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pubdsutils.preprocessing.StandardizeFloatCols.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>df</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.preprocessing.StandardizeFloatCols.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fitting the preprocessing</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>df</strong> (<em>DataFrame</em>) – Data to use for fitting.
+In many cases, should be <code class="docutils literal"><span class="pre">X_train</span></code>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pubdsutils.preprocessing.StandardizeFloatCols.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>df</em>, <em>**transform_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.preprocessing.StandardizeFloatCols.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scaling <code class="docutils literal"><span class="pre">cols</span></code> of <code class="docutils literal"><span class="pre">df</span></code> using the fitting</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>df</strong> (<em>DataFrame</em>) – DataFrame to be preprocessed</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pubdsutils.features_engineering.html"
+                        title="previous chapter">pubdsutils.features_engineering module</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.features_engineering.html" title="pubdsutils.features_engineering module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ds-pub-utils  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >pubdsutils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="pubdsutils.html" >pubdsutils package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, reBuy.com.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

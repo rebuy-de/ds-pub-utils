@@ -1,0 +1,379 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pubdsutils.features_engineering module &#8212; ds-pub-utils  documentation</title>
+    
+    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pubdsutils.preprocessing module" href="pubdsutils.preprocessing.html" />
+    <link rel="prev" title="pubdsutils.data_fetch module" href="pubdsutils.data_fetch.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.preprocessing.html" title="pubdsutils.preprocessing module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.data_fetch.html" title="pubdsutils.data_fetch module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ds-pub-utils  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >pubdsutils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="pubdsutils.html" accesskey="U">pubdsutils package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pubdsutils.features_engineering">
+<span id="pubdsutils-features-engineering-module"></span><h1>pubdsutils.features_engineering module<a class="headerlink" href="#module-pubdsutils.features_engineering" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pubdsutils.features_engineering.DayOfTheWeekForColumn">
+<em class="property">class </em><code class="descclassname">pubdsutils.features_engineering.</code><code class="descname">DayOfTheWeekForColumn</code><span class="sig-paren">(</span><em>col=None</em>, <em>feat_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.DayOfTheWeekForColumn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Compute day-of-the-week of a column</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>col</strong> (<em>str</em>) – Column name of the base feature (should be date)</li>
+<li><strong>feat_name</strong> (<em>str</em><em> (</em><em>default None</em><em>)</em>) – Column name of the new feature. If <code class="docutils literal"><span class="pre">None</span></code> a default name
+<code class="docutils literal"><span class="pre">col_DayOfTheWeek</span></code> will be used</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pubdsutils.features_engineering.DayOfTheWeekForColumn.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>df</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.DayOfTheWeekForColumn.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Doesn’t do anything.
+Provided for the sake of consistency with scikit-learn.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pubdsutils.features_engineering.DayOfTheWeekForColumn.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>df</em>, <em>**transform_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.DayOfTheWeekForColumn.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of <code class="docutils literal"><span class="pre">df</span></code> with a new column (named <code class="docutils literal"><span class="pre">feat_name</span></code>) and
+holding the day of the week as derived from <code class="docutils literal"><span class="pre">df.col</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pubdsutils.features_engineering.DaysFromLaterToEarly">
+<em class="property">class </em><code class="descclassname">pubdsutils.features_engineering.</code><code class="descname">DaysFromLaterToEarly</code><span class="sig-paren">(</span><em>start=None</em>, <em>end=None</em>, <em>feat_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.DaysFromLaterToEarly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Compute number of days between two time features</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>start</strong> (<em>str</em>) – Column name of the earlier (start) date</li>
+<li><strong>end</strong> (<em>str</em>) – Column name of the later (end) date</li>
+<li><strong>feat_name</strong> (<em>str</em><em> (</em><em>default None</em><em>)</em>) – Column name of the new feature. If <code class="docutils literal"><span class="pre">None</span></code> a default name
+<code class="docutils literal"><span class="pre">DaysFrom_start_To_end</span></code> will be used</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pubdsutils.features_engineering.DaysFromLaterToEarly.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>df</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.DaysFromLaterToEarly.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Doesn’t do anything.
+Provided for the sake of consistency with scikit-learn.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pubdsutils.features_engineering.DaysFromLaterToEarly.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>df</em>, <em>**transform_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.DaysFromLaterToEarly.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of <code class="docutils literal"><span class="pre">df</span></code> with a new column (named <code class="docutils literal"><span class="pre">feat_name</span></code>) and
+holding the number of days passed between <code class="docutils literal"><span class="pre">df.start</span></code> and <code class="docutils literal"><span class="pre">df.end</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pubdsutils.features_engineering.HourOfTheDayForColumn">
+<em class="property">class </em><code class="descclassname">pubdsutils.features_engineering.</code><code class="descname">HourOfTheDayForColumn</code><span class="sig-paren">(</span><em>col=None</em>, <em>feat_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.HourOfTheDayForColumn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Compute hour-of-the-day of a column</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>col</strong> (<em>str</em>) – Column name of the base feature (should be date)</li>
+<li><strong>feat_name</strong> (<em>str</em><em> (</em><em>default None</em><em>)</em>) – Column name of the new feature. If <code class="docutils literal"><span class="pre">None</span></code> a default name
+<code class="docutils literal"><span class="pre">col_HourOfTheDay</span></code> will be used</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pubdsutils.features_engineering.HourOfTheDayForColumn.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>df</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.HourOfTheDayForColumn.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Doesn’t do anything.
+Provided for the sake of consistency with scikit-learn.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pubdsutils.features_engineering.HourOfTheDayForColumn.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>df</em>, <em>**transform_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.HourOfTheDayForColumn.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of <code class="docutils literal"><span class="pre">df</span></code> with a new column (named <code class="docutils literal"><span class="pre">feat_name</span></code>) and
+holding the hour of the day as derived from <code class="docutils literal"><span class="pre">df.col</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pubdsutils.features_engineering.RatioBetweenColumns">
+<em class="property">class </em><code class="descclassname">pubdsutils.features_engineering.</code><code class="descname">RatioBetweenColumns</code><span class="sig-paren">(</span><em>numer=None</em>, <em>denom=None</em>, <em>feat_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.RatioBetweenColumns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Ratio between two columns</p>
+<p>Adds a column (or attribute) holding the ratio between
+two columns of a DataFrame (or between two attributes of a Series).</p>
+<p>Returns a <em>copy</em> of the input.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>numer</strong> (<em>str</em>) – Column name of the numerator</li>
+<li><strong>denom</strong> (<em>str</em>) – Column name of the denominator</li>
+<li><strong>feat_name</strong> (<em>str</em><em> (</em><em>default None</em><em>)</em>) – Column name of the new feature. If <code class="docutils literal"><span class="pre">None</span></code> a default name
+<code class="docutils literal"><span class="pre">numerTOdenomRatio</span></code> will be used</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pubdsutils.features_engineering.RatioBetweenColumns.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>df</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.RatioBetweenColumns.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Doesn’t do anything.
+Provided for the sake of consistency with scikit-learn.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pubdsutils.features_engineering.RatioBetweenColumns.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>df</em>, <em>**transform_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.RatioBetweenColumns.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of <code class="docutils literal"><span class="pre">df</span></code> with a new column (named <code class="docutils literal"><span class="pre">feat_name</span></code>) and
+holding the ratio between <code class="docutils literal"><span class="pre">df.numer</span></code> and <code class="docutils literal"><span class="pre">df.denom</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pubdsutils.features_engineering.RatioColumnToConst">
+<em class="property">class </em><code class="descclassname">pubdsutils.features_engineering.</code><code class="descname">RatioColumnToConst</code><span class="sig-paren">(</span><em>col=None</em>, <em>const=None</em>, <em>feat_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.RatioColumnToConst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Ratio between a column and a constant</p>
+<p>Adds a column (or attribute) holding the ratio between a column of
+a DataFrame (or an attribute of a Series) and a constant value</p>
+<p>Returns a <em>copy</em> of the input.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>col</strong> (<em>str</em>) – Column name of the numerator</li>
+<li><strong>const</strong> (<em>numerical value</em>) – Value of the denominator</li>
+<li><strong>feat_name</strong> (<em>str</em><em> (</em><em>default None</em><em>)</em>) – Column name of the new feature. If <code class="docutils literal"><span class="pre">None</span></code> a default name
+<code class="docutils literal"><span class="pre">colTOconstRatio</span></code> will be used</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pubdsutils.features_engineering.RatioColumnToConst.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>df</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.RatioColumnToConst.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Doesn’t do anything.
+Provided for the sake of consistency with scikit-learn.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pubdsutils.features_engineering.RatioColumnToConst.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>df</em>, <em>**transform_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.RatioColumnToConst.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of <code class="docutils literal"><span class="pre">df</span></code> with a new column (named <code class="docutils literal"><span class="pre">feat_name</span></code>) and
+holding the ratio between <code class="docutils literal"><span class="pre">df.col</span></code> and <code class="docutils literal"><span class="pre">const</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pubdsutils.features_engineering.RatioColumnToValue">
+<em class="property">class </em><code class="descclassname">pubdsutils.features_engineering.</code><code class="descname">RatioColumnToValue</code><span class="sig-paren">(</span><em>col=None</em>, <em>func=None</em>, <em>feat_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.RatioColumnToValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Compute the ratio between the values in a column to either the <cite>mean</cite>
+or <cite>median</cite></p>
+<p>An instance has to fitted; at this step the <code class="docutils literal"><span class="pre">func</span></code> is applied to the
+column <code class="docutils literal"><span class="pre">col</span></code> and the result is stored in <code class="docutils literal"><span class="pre">const_</span></code>.
+Then, <code class="docutils literal"><span class="pre">const_</span></code> is used to computed the ratio.</p>
+<p>Assume you have <code class="docutils literal"><span class="pre">X_train</span></code> and <code class="docutils literal"><span class="pre">y_train</span></code>.
+Furthermore, <code class="docutils literal"><span class="pre">X_train</span></code> has a feature <code class="docutils literal"><span class="pre">val</span></code>.
+Say that you want to obtain a new feature which is the ratio between
+<code class="docutils literal"><span class="pre">X_train.val</span></code> and its mean.
+When preparing <code class="docutils literal"><span class="pre">X_test</span></code>, the new feature has to be computed and the mean
+fitted from <code class="docutils literal"><span class="pre">X_train</span></code> has to be used.
+This class, bridges this gap.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">rtc</span> <span class="o">=</span> <span class="n">RatioColumnToValue</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s1">&#39;val&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+<span class="n">rtc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">rtc</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>col</strong> (<em>str</em>) – Column name of the feature</li>
+<li><strong>func</strong> (<em>str</em>) – Function to use. Support either <cite>mean</cite> or <cite>median</cite></li>
+<li><strong>feat_name</strong> (<em>str</em><em> (</em><em>default None</em><em>)</em>) – Column name of the new feature. If <code class="docutils literal"><span class="pre">None</span></code> a default name
+<code class="docutils literal"><span class="pre">col_RatioTo_func</span></code> will be used</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pubdsutils.features_engineering.RatioColumnToValue.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>df</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.RatioColumnToValue.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fits the instance to the mean/median of <code class="docutils literal"><span class="pre">df[col]</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pubdsutils.features_engineering.RatioColumnToValue.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>df</em>, <em>**transform_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.RatioColumnToValue.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the ratio between <code class="docutils literal"><span class="pre">df[col]</span></code> and the mean/median which
+was fitted.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pubdsutils.features_engineering.SelectColumns">
+<em class="property">class </em><code class="descclassname">pubdsutils.features_engineering.</code><code class="descname">SelectColumns</code><span class="sig-paren">(</span><em>cols=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.SelectColumns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Selects the columns/features</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>cols</strong> (<em>list</em>) – List of column names to be selected</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pubdsutils.features_engineering.SelectColumns.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>df</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.SelectColumns.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Doesn’t do anything.
+Provided for the sake of consistency with scikit-learn.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pubdsutils.features_engineering.SelectColumns.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>df</em>, <em>**transform_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.features_engineering.SelectColumns.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of <code class="docutils literal"><span class="pre">df</span></code> holding the columns defined in <code class="docutils literal"><span class="pre">cols</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pubdsutils.data_fetch.html"
+                        title="previous chapter">pubdsutils.data_fetch module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pubdsutils.preprocessing.html"
+                        title="next chapter">pubdsutils.preprocessing module</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.preprocessing.html" title="pubdsutils.preprocessing module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.data_fetch.html" title="pubdsutils.data_fetch module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ds-pub-utils  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >pubdsutils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="pubdsutils.html" >pubdsutils package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, reBuy.com.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

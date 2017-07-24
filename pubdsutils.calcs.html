@@ -1,0 +1,155 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pubdsutils.calcs module &#8212; ds-pub-utils  documentation</title>
+    
+    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pubdsutils.data_fetch module" href="pubdsutils.data_fetch.html" />
+    <link rel="prev" title="pubdsutils package" href="pubdsutils.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.data_fetch.html" title="pubdsutils.data_fetch module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.html" title="pubdsutils package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ds-pub-utils  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >pubdsutils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="pubdsutils.html" accesskey="U">pubdsutils package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pubdsutils.calcs">
+<span id="pubdsutils-calcs-module"></span><h1>pubdsutils.calcs module<a class="headerlink" href="#module-pubdsutils.calcs" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pubdsutils.calcs.value_counts_comb">
+<code class="descclassname">pubdsutils.calcs.</code><code class="descname">value_counts_comb</code><span class="sig-paren">(</span><em>s</em>, <em>sort=True</em>, <em>ascending=False</em>, <em>bins=None</em>, <em>dropna=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.calcs.value_counts_comb" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper of value_counts which returns both the counts and the
+normalized view.</p>
+<p>The resulting object will be in descending order so that the
+first element is the most frequently-occurring element.
+Excludes NA values by default.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>normalize</strong> (<em>boolean</em><em>, </em><em>default False</em>) – If True then the object returned will contain the relative
+frequencies of the unique values.</li>
+<li><strong>sort</strong> (<em>boolean</em><em>, </em><em>default True</em>) – Sort by values</li>
+<li><strong>ascending</strong> (<em>boolean</em><em>, </em><em>default False</em>) – Sort in ascending order</li>
+<li><strong>bins</strong> (<em>integer</em><em>, </em><em>optional</em>) – Rather than count values, group them into half-open bins,
+a convenience for pd.cut, only works with numeric data</li>
+<li><strong>dropna</strong> (<em>boolean</em><em>, </em><em>default True</em>) – Don’t include counts of NaN.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>counts</strong></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">DataFrame</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pubdsutils.html"
+                        title="previous chapter">pubdsutils package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pubdsutils.data_fetch.html"
+                        title="next chapter">pubdsutils.data_fetch module</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.data_fetch.html" title="pubdsutils.data_fetch module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.html" title="pubdsutils package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ds-pub-utils  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >pubdsutils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="pubdsutils.html" >pubdsutils package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, reBuy.com.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>

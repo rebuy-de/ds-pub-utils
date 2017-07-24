@@ -1,0 +1,202 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pubdsutils.data_fetch module &#8212; ds-pub-utils  documentation</title>
+    
+    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pubdsutils.features_engineering module" href="pubdsutils.features_engineering.html" />
+    <link rel="prev" title="pubdsutils.calcs module" href="pubdsutils.calcs.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.features_engineering.html" title="pubdsutils.features_engineering module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.calcs.html" title="pubdsutils.calcs module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ds-pub-utils  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >pubdsutils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="pubdsutils.html" accesskey="U">pubdsutils package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pubdsutils.data_fetch">
+<span id="pubdsutils-data-fetch-module"></span><h1>pubdsutils.data_fetch module<a class="headerlink" href="#module-pubdsutils.data_fetch" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pubdsutils.data_fetch.from_sql_sever">
+<code class="descclassname">pubdsutils.data_fetch.</code><code class="descname">from_sql_sever</code><span class="sig-paren">(</span><em>config_file</em>, <em>query=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.data_fetch.from_sql_sever" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch data from MS SQL</p>
+<p>Query the MS SQL data warehouse using <code class="docutils literal"><span class="pre">query</span></code> and the settings
+in the configuration file.
+The configuration file is passed and processed by
+<a class="reference internal" href="#pubdsutils.data_fetch.mssql_connector_from_ini" title="pubdsutils.data_fetch.mssql_connector_from_ini"><code class="xref py py-func docutils literal"><span class="pre">mssql_connector_from_ini()</span></code></a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>config_file</strong> (<em>str</em>) – location of the configuration file</li>
+<li><strong>query</strong> (<em>str</em>) – valid SQL query as a string</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">pandas.DataFrame</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pubdsutils.data_fetch.mssql_connector_from_ini">
+<code class="descclassname">pubdsutils.data_fetch.</code><code class="descname">mssql_connector_from_ini</code><span class="sig-paren">(</span><em>ini_file</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.data_fetch.mssql_connector_from_ini" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare MSSQL connector using an INI file</p>
+<p>Read configurations from an INI file and construct a connector
+to an MS SQL server.</p>
+<p>Following is an example of the config file as <code class="docutils literal"><span class="pre">.ini</span></code>.</p>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[Base]</span>
+<span class="na">server</span> <span class="o">=</span> <span class="s">url.of.server</span>
+<span class="na">domain</span> <span class="o">=</span> <span class="s">DOMAIN</span>
+<span class="na">username</span> <span class="o">=</span> <span class="s">user.name</span>
+<span class="na">password</span> <span class="o">=</span> <span class="s">yourpassword</span>
+<span class="na">port</span> <span class="o">=</span> <span class="s">1234 # if missing falls back to 1433</span>
+</pre></div>
+</div>
+<p><em>Note</em> that this <code class="docutils literal"><span class="pre">.ini</span></code> contains your password! Be careful.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ini_file</strong> (<em>str</em>) – Path to the INI file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Connection</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://pymssql.org/en/stable/ref/pymssql.html#pymssql.Connection">pymssql.Connection</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pubdsutils.data_fetch.persist_df">
+<code class="descclassname">pubdsutils.data_fetch.</code><code class="descname">persist_df</code><span class="sig-paren">(</span><em>df</em>, <em>path=None</em>, <em>sql=None</em>, <em>prefix=’raw_df’</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.data_fetch.persist_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pickles a DataFrame and assigns hash to the filename</p>
+<p>Optionally, can also include the related SQL query</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> (<em>str</em><em> or </em><em>None</em><em> (</em><em>default</em><em>)</em>) – If not None should be a path including a trailing <code class="docutils literal"><span class="pre">/</span></code>.
+If <code class="docutils literal"><span class="pre">None</span></code>, use the current directory.</li>
+<li><strong>sql</strong> (<em>str</em><em> (</em><em>optional</em><em>)</em>) – If provided, string of the SQL which generated the DataFrame will
+be stored alongside the pickle.</li>
+<li><strong>prefix</strong> (str (default <code class="docutils literal"><span class="pre">raw_df</span></code>)) – Prefix of pickels</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pubdsutils.calcs.html"
+                        title="previous chapter">pubdsutils.calcs module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pubdsutils.features_engineering.html"
+                        title="next chapter">pubdsutils.features_engineering module</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.features_engineering.html" title="pubdsutils.features_engineering module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.calcs.html" title="pubdsutils.calcs module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ds-pub-utils  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >pubdsutils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="pubdsutils.html" >pubdsutils package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, reBuy.com.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>
