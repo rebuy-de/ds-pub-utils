@@ -49,7 +49,9 @@ class TestColumnsOneHotEncoder(unittest.TestCase):
 
 
 class TestStandartizeFloatCols(unittest.TestCase):
-
+    # TODO: Test the case where the class is instantiated with cols=['col1']
+    #       That is, with a single column. See the handling of this case in the
+    #       LabelEncodingColoumns class.
     def setUp(self):
         self.v1 = np.array([1., 2., 3.])
         self.v1_mean = self.v1.mean()
@@ -160,4 +162,43 @@ class TestRemoveConstantColumns(unittest.TestCase):
         self.assertListEqual(
             rcc.const_cols.tolist(),
             ["v1", "v3"]
+        )
+
+
+class TestLabelEncodingColoumns(unittest.TestCase):
+
+    def setUp(self):
+        self.df = pd.DataFrame({
+            'fruit':  ['apple', 'orange', 'pear', 'orange'],
+            'color':  ['red', 'orange', 'green', 'green'],
+            'weight': [5, 6, 3, 4]
+        })
+
+    def test_basic_encoding(self):
+        expected_res = pd.DataFrame({
+            'fruit': [0, 1, 2, 1],
+            'color': ['red', 'orange', 'green', 'green'],
+            'weight': [5, 6, 3, 4]
+        })
+        assert_array_equal(
+            pp.LabelEncodingColoumns(cols=['fruit']).fit_transform(self.df),
+            expected_res
+        )
+
+    def test_fit_and_transform(self):
+        lec = pp.LabelEncodingColoumns(cols=['fruit'])
+        lec.fit(self.df)
+        in_df = pd.DataFrame({
+            'fruit':  ['orange', 'pear', 'orange'],
+            'color':  ['orange', 'green', 'green'],
+            'weight': [6, 3, 4]
+        })
+        out_df = pd.DataFrame({
+            'fruit':  [1, 2, 1],
+            'color':  ['orange', 'green', 'green'],
+            'weight': [6, 3, 4]
+        })
+        assert_frame_equal(
+            lec.transform(in_df),
+            out_df
         )

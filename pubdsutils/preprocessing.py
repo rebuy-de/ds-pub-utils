@@ -8,6 +8,7 @@ scikit-learn
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import LabelEncoder
 from sklearn.exceptions import NotFittedError
 
 from sklearn.utils.validation import check_is_fitted
@@ -189,5 +190,66 @@ class StandartizeFloatCols(BaseEstimator, TransformerMixin):
         """
         pdu._is_cols_subset_of_df_cols(self.cols, df)
         self.standard_scaler.fit(df[self.cols])
+        self._is_fitted = True
+        return self
+
+
+class LabelEncodingColoumns(BaseEstimator, TransformerMixin):
+
+    def __init__(self, cols=None):
+        pdu._is_cols_input_valid(cols)
+        self.cols = cols
+        self.label_encoder = LabelEncoder()
+        self._is_fitted = False
+
+    def transform(self, df, **transform_params):
+        """
+        Scaling ``cols`` of ``df`` using the fitting
+
+        Parameters
+        ----------
+        df : DataFrame
+            DataFrame to be preprocessed
+        """
+        if not self._is_fitted:
+            raise NotFittedError("Fitting was not preformed")
+        pdu._is_cols_subset_of_df_cols(self.cols, df)
+
+        df = df.copy()
+
+        if len(self.cols) == 1:
+            label_enc_arr = self.label_encoder.transform(df[self.cols[0]])
+        else:
+            label_enc_arr = self.label_encoder.transform(df[self.cols])
+
+        labelenc_cols = pd.DataFrame(
+            # StandardScaler returns a NumPy.array, and thus indexing
+            # breaks. Explicitly fixed next.
+            label_enc_arr,
+            columns=self.cols,
+            # The index of the resulting DataFrame should be assigned and
+            # equal to the one of the original DataFrame. Otherwise, upon
+            # concatenation NaNs will be introduced.
+            index=df.index
+        )
+        for col in self.cols:
+            df[col] = labelenc_cols[col]
+        return df
+
+    def fit(self, df, y=None, **fit_params):
+        """
+        Fitting the preprocessing
+
+        Parameters
+        ----------
+        df : DataFrame
+            Data to use for fitting.
+            In many cases, should be ``X_train``.
+        """
+        pdu._is_cols_subset_of_df_cols(self.cols, df)
+        if len(self.cols) == 1:
+            self.label_encoder.fit(df[self.cols[0]])
+        else:
+            self.label_encoder.fit(df[self.cols])
         self._is_fitted = True
         return self
