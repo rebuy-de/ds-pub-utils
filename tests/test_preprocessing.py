@@ -174,14 +174,42 @@ class TestLabelEncodingColoumns(unittest.TestCase):
             'weight': [5, 6, 3, 4]
         })
 
-    def test_basic_encoding(self):
+    def test_basic_encoding_single_column(self):
         expected_res = pd.DataFrame({
             'fruit': [0, 1, 2, 1],
             'color': ['red', 'orange', 'green', 'green'],
             'weight': [5, 6, 3, 4]
         })
-        assert_array_equal(
+        assert_frame_equal(
             pp.LabelEncodingColoumns(cols=['fruit']).fit_transform(self.df),
+            expected_res
+        )
+
+    def test_basic_encoding_both_cols(self):
+        expected_res = pd.DataFrame({
+            'fruit': [0, 1, 2, 1],
+            'color': [2, 1, 0, 0],
+            'weight': [5, 6, 3, 4]
+        })
+        assert_frame_equal(
+            pp.LabelEncodingColoumns(
+                cols=['fruit', 'color']).fit_transform(self.df),
+            expected_res
+        )
+
+    def test_encoding_two_out_of_three_cols(self):
+        df = pd.DataFrame({
+            'fruit': ['apple', 'orange', 'pear', 'orange'],
+            'color': ['red', 'orange', 'green', 'green'],
+            'world': ['foo', 'bar', 'foo', 'foo']
+        })
+        expected_res = pd.DataFrame({
+            'fruit': [0, 1, 2, 1],
+            'color': [2, 1, 0, 0],
+            'world': ['foo', 'bar', 'foo', 'foo']
+        })
+        assert_frame_equal(
+            pp.LabelEncodingColoumns(cols=['fruit', 'color']).fit_transform(df),
             expected_res
         )
 
@@ -196,6 +224,24 @@ class TestLabelEncodingColoumns(unittest.TestCase):
         out_df = pd.DataFrame({
             'fruit':  [1, 2, 1],
             'color':  ['orange', 'green', 'green'],
+            'weight': [6, 3, 4]
+        })
+        assert_frame_equal(
+            lec.transform(in_df),
+            out_df
+        )
+
+    def test_fit_and_transform_two_cols(self):
+        lec = pp.LabelEncodingColoumns(cols=['fruit', 'color'])
+        lec.fit(self.df)
+        in_df = pd.DataFrame({
+            'fruit':  ['orange', 'pear', 'orange'],
+            'color':  ['orange', 'green', 'green'],
+            'weight': [6, 3, 4]
+        })
+        out_df = pd.DataFrame({
+            'fruit':  [1, 2, 1],
+            'color':  [1, 0, 0],
             'weight': [6, 3, 4]
         })
         assert_frame_equal(

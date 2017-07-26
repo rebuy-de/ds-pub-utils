@@ -199,7 +199,7 @@ class LabelEncodingColoumns(BaseEstimator, TransformerMixin):
     def __init__(self, cols=None):
         pdu._is_cols_input_valid(cols)
         self.cols = cols
-        self.label_encoder = LabelEncoder()
+        self.les = {col: LabelEncoder() for col in cols}
         self._is_fitted = False
 
     def transform(self, df, **transform_params):
@@ -217,21 +217,17 @@ class LabelEncodingColoumns(BaseEstimator, TransformerMixin):
 
         df = df.copy()
 
-        if len(self.cols) == 1:
-            label_enc_arr = self.label_encoder.transform(df[self.cols[0]])
-        else:
-            label_enc_arr = self.label_encoder.transform(df[self.cols])
+        label_enc_dict = {}
+        for col in self.cols:
+            label_enc_dict[col] = self.les[col].transform(df[col])
 
-        labelenc_cols = pd.DataFrame(
-            # StandardScaler returns a NumPy.array, and thus indexing
-            # breaks. Explicitly fixed next.
-            label_enc_arr,
-            columns=self.cols,
+        labelenc_cols = pd.DataFrame(label_enc_dict,
             # The index of the resulting DataFrame should be assigned and
             # equal to the one of the original DataFrame. Otherwise, upon
             # concatenation NaNs will be introduced.
             index=df.index
         )
+
         for col in self.cols:
             df[col] = labelenc_cols[col]
         return df
@@ -247,9 +243,7 @@ class LabelEncodingColoumns(BaseEstimator, TransformerMixin):
             In many cases, should be ``X_train``.
         """
         pdu._is_cols_subset_of_df_cols(self.cols, df)
-        if len(self.cols) == 1:
-            self.label_encoder.fit(df[self.cols[0]])
-        else:
-            self.label_encoder.fit(df[self.cols])
+        for col in self.cols:
+            self.les[col].fit(df[col])
         self._is_fitted = True
         return self
