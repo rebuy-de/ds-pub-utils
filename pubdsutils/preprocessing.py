@@ -195,6 +195,17 @@ class StandartizeFloatCols(BaseEstimator, TransformerMixin):
 
 
 class LabelEncodingColoumns(BaseEstimator, TransformerMixin):
+    """Standard-scale the columns in the data frame.
+
+    Apply sklearn.preprocessing.LabelEncoder_ to `cols`
+
+    .. _sklearn.preprocessing.LabelEncoder : https://is.gd/Vx2njl
+
+    Attributes
+    ----------
+    cols : list
+        List of columns in the data to be scaled
+    """
 
     def __init__(self, cols=None):
         pdu._is_cols_input_valid(cols)
@@ -204,7 +215,7 @@ class LabelEncodingColoumns(BaseEstimator, TransformerMixin):
 
     def transform(self, df, **transform_params):
         """
-        Scaling ``cols`` of ``df`` using the fitting
+        Label encoding ``cols`` of ``df`` using the fitting
 
         Parameters
         ----------
