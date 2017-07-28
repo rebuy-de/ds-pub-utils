@@ -125,6 +125,51 @@ One-Hot-Encoding</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="pubdsutils.preprocessing.LabelEncodingColoumns">
+<em class="property">class </em><code class="descclassname">pubdsutils.preprocessing.</code><code class="descname">LabelEncodingColoumns</code><span class="sig-paren">(</span><em>cols=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.preprocessing.LabelEncodingColoumns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.BaseEstimator</span></code>, <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
+<p>Label encoding selected columns</p>
+<p>Apply <a class="reference external" href="https://is.gd/Vx2njl">sklearn.preprocessing.LabelEncoder</a> to <cite>cols</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>cols</strong> (<em>list</em>) – List of columns in the data to be scaled</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pubdsutils.preprocessing.LabelEncodingColoumns.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>df</em>, <em>y=None</em>, <em>**fit_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.preprocessing.LabelEncodingColoumns.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fitting the preprocessing</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>df</strong> (<em>DataFrame</em>) – Data to use for fitting.
+In many cases, should be <code class="docutils literal"><span class="pre">X_train</span></code>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pubdsutils.preprocessing.LabelEncodingColoumns.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>df</em>, <em>**transform_params</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.preprocessing.LabelEncodingColoumns.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label encoding <code class="docutils literal"><span class="pre">cols</span></code> of <code class="docutils literal"><span class="pre">df</span></code> using the fitting</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>df</strong> (<em>DataFrame</em>) – DataFrame to be preprocessed</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="pubdsutils.preprocessing.RemoveConstantColumns">
 <em class="property">class </em><code class="descclassname">pubdsutils.preprocessing.</code><code class="descname">RemoveConstantColumns</code><a class="headerlink" href="#pubdsutils.preprocessing.RemoveConstantColumns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">sklearn.base.TransformerMixin</span></code></p>
