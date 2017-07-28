@@ -196,7 +196,7 @@ class StandardizeFloatCols(BaseEstimator, TransformerMixin):
 
 
 class LabelEncodingColoumns(BaseEstimator, TransformerMixin):
-    """Standard-scale the columns in the data frame.
+    """Label encoding selected columns
 
     Apply sklearn.preprocessing.LabelEncoder_ to `cols`
 
