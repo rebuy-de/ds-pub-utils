@@ -8,6 +8,7 @@ scikit-learn
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import LabelEncoder
 from sklearn.exceptions import NotFittedError
 
 from sklearn.utils.validation import check_is_fitted
@@ -190,5 +191,71 @@ class StandardizeFloatCols(BaseEstimator, TransformerMixin):
         """
         pdu._is_cols_subset_of_df_cols(self.cols, df)
         self.standard_scaler.fit(df[self.cols])
+        self._is_fitted = True
+        return self
+
+
+class LabelEncodingColoumns(BaseEstimator, TransformerMixin):
+    """Standard-scale the columns in the data frame.
+
+    Apply sklearn.preprocessing.LabelEncoder_ to `cols`
+
+    .. _sklearn.preprocessing.LabelEncoder : https://is.gd/Vx2njl
+
+    Attributes
+    ----------
+    cols : list
+        List of columns in the data to be scaled
+    """
+
+    def __init__(self, cols=None):
+        pdu._is_cols_input_valid(cols)
+        self.cols = cols
+        self.les = {col: LabelEncoder() for col in cols}
+        self._is_fitted = False
+
+    def transform(self, df, **transform_params):
+        """
+        Label encoding ``cols`` of ``df`` using the fitting
+
+        Parameters
+        ----------
+        df : DataFrame
+            DataFrame to be preprocessed
+        """
+        if not self._is_fitted:
+            raise NotFittedError("Fitting was not preformed")
+        pdu._is_cols_subset_of_df_cols(self.cols, df)
+
+        df = df.copy()
+
+        label_enc_dict = {}
+        for col in self.cols:
+            label_enc_dict[col] = self.les[col].transform(df[col])
+
+        labelenc_cols = pd.DataFrame(label_enc_dict,
+            # The index of the resulting DataFrame should be assigned and
+            # equal to the one of the original DataFrame. Otherwise, upon
+            # concatenation NaNs will be introduced.
+            index=df.index
+        )
+
+        for col in self.cols:
+            df[col] = labelenc_cols[col]
+        return df
+
+    def fit(self, df, y=None, **fit_params):
+        """
+        Fitting the preprocessing
+
+        Parameters
+        ----------
+        df : DataFrame
+            Data to use for fitting.
+            In many cases, should be ``X_train``.
+        """
+        pdu._is_cols_subset_of_df_cols(self.cols, df)
+        for col in self.cols:
+            self.les[col].fit(df[col])
         self._is_fitted = True
         return self
