@@ -8,6 +8,7 @@ Submodules
 
    pubdsutils.calcs
    pubdsutils.data_fetch
+   pubdsutils.email
    pubdsutils.features_engineering
    pubdsutils.preprocessing
 

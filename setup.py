@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='pubdsutils',
-      version='0.1',
+      version='0.2',
       description='Package of DS related public tools from reBuy.com',
       author='reBuy.com',
       author_email='datascience@rebuy.com',
