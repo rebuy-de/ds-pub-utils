@@ -59,4 +59,4 @@ Source is [SO answer](https://stackoverflow.com/a/18818891/671013).
 * Execute `sphinx-apidoc -f -o . ../pubdsutils/` from `./docs` when adding/removing module/packages
 * **Documentation:**
   * `make html` from `./docs` will generate the documentation.
-  * After building the docs, you can publish them (`./docs/_build/html`) to the `gh-pages` branch. Most easily, this can be done, by `ghp-import docs/_build/html/` from the project's root.
+  * After building the docs, you can publish them (`./docs/_build/html`) to the `gh-pages` branch. Most easily, this can be done, by `ghp-import -n -p docs/_build/html` from the project's root.
