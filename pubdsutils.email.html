@@ -1,0 +1,180 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pubdsutils.email module &#8212; ds-pub-utils  documentation</title>
+    
+    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pubdsutils.features_engineering module" href="pubdsutils.features_engineering.html" />
+    <link rel="prev" title="pubdsutils.data_fetch module" href="pubdsutils.data_fetch.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head>
+  <body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.features_engineering.html" title="pubdsutils.features_engineering module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.data_fetch.html" title="pubdsutils.data_fetch module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ds-pub-utils  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >pubdsutils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="pubdsutils.html" accesskey="U">pubdsutils package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-pubdsutils.email">
+<span id="pubdsutils-email-module"></span><h1>pubdsutils.email module<a class="headerlink" href="#module-pubdsutils.email" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="pubdsutils.email.send_df">
+<code class="descclassname">pubdsutils.email.</code><code class="descname">send_df</code><span class="sig-paren">(</span><em>df</em>, <em>config_ini</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.email.send_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send a pandas.DataFrame per email as an attached CSV</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>estimate</strong> (<em>pandas.DataFrame</em>) – Data to be sent</li>
+<li><strong>config_ini</strong> (<em>str</em>) – <p>Path and filename of INI file. It should contain the section <code class="docutils literal"><span class="pre">server</span></code>
+as described in <a class="reference internal" href="#pubdsutils.email.set_email_server" title="pubdsutils.email.set_email_server"><code class="xref py py-func docutils literal"><span class="pre">set_email_server()</span></code></a>. In addition, it has to
+contain the section <code class="docutils literal"><span class="pre">content</span></code>:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[content]</span>
+<span class="na">SUBJECT</span> <span class="o">=</span> <span class="s">Subject of the email (Generated on Y-m-d H:M:S</span>
+<span class="s">                                will be appended)</span>
+<span class="na">FROM</span> <span class="o">=</span> <span class="s">sent@from.here</span>
+<span class="na">TO</span> <span class="o">=</span> <span class="s">send.to@foo.bar[, another@foo.bar]</span>
+<span class="na">BODY</span> <span class="o">=</span> <span class="s">Body of the message. NO LINE BREAKS!</span>
+<span class="na">FILENAME</span> <span class="o">=</span> <span class="s">foo.csv # note the .csv!</span>
+</pre></div>
+</div>
+</li>
+<li><strong>**kwargs</strong> – passed to pandas.DataFrame.to_csv()</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pubdsutils.email.set_email_server">
+<code class="descclassname">pubdsutils.email.</code><code class="descname">set_email_server</code><span class="sig-paren">(</span><em>config_ini</em><span class="sig-paren">)</span><a class="headerlink" href="#pubdsutils.email.set_email_server" title="Permalink to this definition">¶</a></dt>
+<dd><p>Setting up an smtp client using INI file</p>
+<p>The INI file should have the following section:</p>
+<div class="highlight-ini"><div class="highlight"><pre><span></span><span class="k">[server]</span>
+<span class="na">EMAIL_HOST</span> <span class="o">=</span> <span class="s">smtp.host.name.com</span>
+<span class="na">EMAIL_HOST_USER</span> <span class="o">=</span> <span class="s">XXXXXXXXXXXXXXXXXXXX # For example Amazon user</span>
+<span class="na">EMAIL_HOST_PASSWORD</span> <span class="o">=</span> <span class="s">YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY</span>
+<span class="na">EMAIL_PORT</span> <span class="o">=</span> <span class="s">587</span>
+<span class="na">EMAIL_TTLS</span> <span class="o">=</span> <span class="s">1</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>config_ini</strong> (<em>str</em>) – Path to the config file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">smtplib.SMTP</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pubdsutils.data_fetch.html"
+                        title="previous chapter">pubdsutils.data_fetch module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pubdsutils.features_engineering.html"
+                        title="next chapter">pubdsutils.features_engineering module</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.features_engineering.html" title="pubdsutils.features_engineering module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pubdsutils.data_fetch.html" title="pubdsutils.data_fetch module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">ds-pub-utils  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >pubdsutils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="pubdsutils.html" >pubdsutils package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, reBuy.com.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.2.
+    </div>
+  </body>
+</html>
